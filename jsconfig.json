@@ -1,0 +1,9 @@
+{
+  "sourceMap": true,
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": ["node_modules", "dist"]
+}
