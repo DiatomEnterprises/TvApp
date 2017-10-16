@@ -35,7 +35,9 @@ var config = {
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
     alias: {
-      "#preact": path.resolve("./src/preact")
+      "#preact": path.resolve("./src/preact"),
+      "#components": path.resolve("./src/components"),
+      "#redux": path.resolve("./src/redux")
     }
   },
   plugins: [

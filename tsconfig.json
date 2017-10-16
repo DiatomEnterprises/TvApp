@@ -15,7 +15,9 @@
     "skipLibCheck": true,
     "suppressImplicitAnyIndexErrors": true,
     "paths": {
-      "#preact": ["src/preact.ts"]
+      "#preact": ["src/preact.ts"],
+      "#components": ["src/components/index.ts"],
+      "#redux/*": ["src/redux/*"]
     }
   },
   "exclude": ["node_modules", "dist", "server.js"]
