@@ -3,7 +3,7 @@
     "baseUrl": "./",
     "target": "es3",
     "jsx": "react",
-    "jsxFactory": "window.JSXCompiler",
+    "jsxFactory": "Preact.h",
     "module": "commonjs",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
@@ -15,9 +15,7 @@
     "skipLibCheck": true,
     "suppressImplicitAnyIndexErrors": true,
     "paths": {
-      "#elements": ["src/elements/index.ts"],
-      "#templates": ["src/templates/index.ts"],
-      "#utils": ["src/utils/index.ts"]
+      "#preact": ["src/preact.ts"]
     }
   },
   "exclude": ["node_modules", "dist", "server.js"]

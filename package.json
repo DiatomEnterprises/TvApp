@@ -1,7 +1,9 @@
 {
   "name": "oregan-tv",
   "version": "1.0.0",
-  "main": "src/index.ts",
+  "author": "GuskiS",
+  "license": "MIT",
+  "main": "src/index.tsx",
   "scripts": {
     "start": "npm run server:dev",
     "server": "npm run server:dev",
@@ -17,28 +19,25 @@
     "clean": "rimraf -- dist",
     "express": "node server.js"
   },
-  "author": "GuskiS",
-  "license": "MIT",
-  "devDependencies": {
-    "awesome-typescript-loader": "3.2.3",
+  "dependencies": {
     "cross-env": "5.0.5",
     "css-loader": "0.28.7",
     "eslint": "4.8.0",
     "expose-loader": "0.7.3",
+    "express": "4.16.2",
     "html-loader": "0.5.1",
     "html-webpack-plugin": "2.30.1",
+    "preact": "8.2.5",
     "prettier": "1.7.4",
     "rimraf": "2.6.2",
     "source-map-loader": "0.2.2",
     "style-loader": "0.19.0",
+    "ts-loader": "3.0.2",
     "tslint": "5.7.0",
     "tslint-loader": "3.5.3",
     "typescript": "2.5.3",
     "webpack": "3.7.1",
     "webpack-dashboard": "0.4.0",
     "webpack-dev-server": "2.7.1"
-  },
-  "dependencies": {
-    "express": "4.16.2"
   }
 }
