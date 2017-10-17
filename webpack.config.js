@@ -37,7 +37,8 @@ var config = {
     alias: {
       "#preact": path.resolve("./src/preact"),
       "#components": path.resolve("./src/components"),
-      "#redux": path.resolve("./src/redux")
+      "#redux": path.resolve("./src/redux"),
+      "#pages": path.resolve("./src/pages")
     }
   },
   plugins: [

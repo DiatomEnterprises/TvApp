@@ -3,3 +3,7 @@ declare namespace Reducers {
     focused: string
   }
 }
+
+declare namespace Router {
+  export type Route = (props: { path: string }) => JSX.Element
+}
