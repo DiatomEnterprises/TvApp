@@ -1,4 +1,5 @@
 import Preact from "#preact"
+import { route } from "preact-router"
 import { Link } from "preact-router/match"
 
 const items = [
@@ -10,14 +11,22 @@ const items = [
   { name: "Browse", path: "/browse" }
 ]
 
-export const Navigation = () => {
-  return (
-    <div className="c-nav">
-      {items.map(({ path, name }) => (
-        <Link href={path} className="c-nav__item" activeClassName="c-focused">
-          {name}
-        </Link>
-      ))}
-    </div>
-  )
+const getPath = (path: string) => (path && path !== "/" ? path : items[0].path)
+
+export class Navigation extends Preact.Component<{}, {}> {
+  componentDidMount() {
+    route(getPath(window.location.hash.substr(1)), true)
+  }
+
+  render() {
+    return (
+      <div className="c-nav">
+        {items.map(({ path, name }) => (
+          <Link href={path} className="c-nav__item" activeClassName="c-focused">
+            {name}
+          </Link>
+        ))}
+      </div>
+    )
+  }
 }

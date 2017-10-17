@@ -1,9 +1,9 @@
 import { combineReducers } from "redux"
 
-import navigation from "./Navigation"
+import utils from "./Utils"
 
 const reducers = combineReducers({
-  navigation
+  utils
 })
 
 export default (state: any, action: Redux.AnyAction) => reducers(state, action)

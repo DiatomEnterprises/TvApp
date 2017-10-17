@@ -5,7 +5,7 @@ import { Featured, Recent, CatchUp, Subscription, Collections, Browse } from "#p
 
 export const Routes = () => (
   <Router history={createHashHistory()}>
-    <Featured path="/featured" />
+    <Featured default path="/featured" />
     <Recent path="/recent" />
     <CatchUp path="/catch-up" />
     <Subscription path="/subscription" />
