@@ -18,7 +18,8 @@
       "#preact": ["src/preact.ts"],
       "#components": ["src/components/index.ts"],
       "#redux/*": ["src/redux/*"],
-      "#pages": ["src/pages/index.ts"]
+      "#pages": ["src/pages/index.ts"],
+      "#utils": ["src/utils/index.ts"]
     }
   },
   "exclude": ["node_modules", "dist", "server.js"]

@@ -1,6 +1,14 @@
 import Preact from "#preact"
+import * as classNames from "classnames"
 import { route } from "preact-router"
-import { Link } from "preact-router/match"
+import { Match } from "preact-router/match"
+
+interface LinkProps {
+  className: string
+  activeClassName: string
+  path: string
+  children?: JSX.Element
+}
 
 const items = [
   { name: "Featured", path: "/featured" },
@@ -10,6 +18,15 @@ const items = [
   { name: "Collections", path: "/collections" },
   { name: "Browse", path: "/browse" }
 ]
+const Link = ({ className, activeClassName, path, children }: LinkProps) => (
+  <Match path={path}>
+    {({ matches }: { matches: boolean }) => (
+      <div onClick={() => route(path)} className={classNames(className, { [activeClassName]: matches })}>
+        {children}
+      </div>
+    )}
+  </Match>
+)
 
 const getPath = (path: string) => (path && path !== "/" ? path : items[0].path)
 
@@ -22,7 +39,7 @@ export class Navigation extends Preact.Component<{}, {}> {
     return (
       <div className="c-nav">
         {items.map(({ path, name }) => (
-          <Link href={path} className="c-nav__item" activeClassName="c-focused">
+          <Link path={path} className="c-nav__item" activeClassName="c-focused">
             {name}
           </Link>
         ))}

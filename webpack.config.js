@@ -38,7 +38,8 @@ var config = {
       "#preact": path.resolve("./src/preact"),
       "#components": path.resolve("./src/components"),
       "#redux": path.resolve("./src/redux"),
-      "#pages": path.resolve("./src/pages")
+      "#pages": path.resolve("./src/pages"),
+      "#utils": path.resolve("./src/utils")
     }
   },
   plugins: [

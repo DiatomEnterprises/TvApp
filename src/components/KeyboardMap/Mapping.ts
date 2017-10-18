@@ -1,3 +1,5 @@
+import { Events } from "#utils"
+
 const FOCUSED_CLASS = ".c-focused"
 
 const Mapping: KeyboardMap.Map = {
@@ -16,16 +18,16 @@ export const Execute = (map: keyof KeyboardMap.Map, control: keyof KeyboardMap.C
 
   switch (action) {
     case ":prev": {
-      const sibling = element.previousSibling as HTMLElement
+      const sibling = element.previousElementSibling
       if (sibling) {
-        sibling.click()
+        Events.click(sibling)
       }
       return
     }
     case ":next": {
-      const sibling = element.nextSibling as HTMLElement
+      const sibling = element.nextElementSibling as HTMLElement
       if (sibling) {
-        sibling.click()
+        Events.click(sibling)
       }
       return
     }
