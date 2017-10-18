@@ -46,26 +46,28 @@ const config = {
       { test: /\.html$/, loader: "html-loader" },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            {
-              loader: "css-loader",
-              options: {
-                sourceMap: true,
-                modules: false,
-                importLoaders: true,
-                localIdentName: "[name]__[local]___[hash:base64:5]"
+        use: ["css-hot-loader"].concat(
+          ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: [
+              {
+                loader: "css-loader",
+                options: {
+                  sourceMap: true,
+                  modules: false,
+                  importLoaders: true,
+                  localIdentName: "[name]__[local]___[hash:base64:5]"
+                }
+              },
+              {
+                loader: "sass-loader",
+                options: {
+                  sourceMap: true
+                }
               }
-            },
-            {
-              loader: "sass-loader",
-              options: {
-                sourceMap: true
-              }
-            }
-          ]
-        })
+            ]
+          })
+        )
       }
     ]
   },
