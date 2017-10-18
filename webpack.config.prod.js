@@ -1,12 +1,13 @@
-const webpack = require("webpack")
 const path = require("path")
+const webpack = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const DashboardPlugin = require("webpack-dashboard/plugin")
-const nodeEnv = process.env.NODE_ENV || "development"
-const isProd = nodeEnv === "production"
+const CompressionPlugin = require("compression-webpack-plugin")
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
-var config = {
-  devtool: isProd ? "hidden-source-map" : "source-map",
+const NODE_ENV = process.env.NODE_ENV || "development"
+
+const config = {
+  devtool: "hidden-source-map",
   context: path.resolve("./src"),
   entry: {
     app: "./index.tsx",
@@ -15,10 +16,7 @@ var config = {
   output: {
     path: path.resolve("./dist"),
     filename: "[name].bundle.js",
-    sourceMapFilename: "[name].bundle.map",
-    devtoolModuleFilenameTemplate: function(info) {
-      return "file:///" + info.absoluteResourcePath
-    }
+    sourceMapFilename: "[name].bundle.map"
   },
   module: {
     rules: [
@@ -26,10 +24,32 @@ var config = {
         enforce: "pre",
         test: /\.tsx?$/,
         exclude: ["node_modules", "server.js"],
-        use: ["ts-loader", "source-map-loader"]
+        use: ["ts-loader"]
       },
       { test: /\.html$/, loader: "html-loader" },
-      { test: /\.css$/, loaders: ["style-loader", "css-loader"] }
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            {
+              loader: "css-loader",
+              options: {
+                sourceMap: true,
+                modules: false,
+                importLoaders: true,
+                localIdentName: "[name]__[local]___[hash:base64:5]"
+              }
+            },
+            {
+              loader: "sass-loader",
+              options: {
+                sourceMap: true
+              }
+            }
+          ]
+        })
+      }
     ]
   },
   resolve: {
@@ -43,9 +63,10 @@ var config = {
     }
   },
   plugins: [
+    new ExtractTextPlugin("styles.css"),
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: JSON.stringify(nodeEnv)
+        NODE_ENV: JSON.stringify(NODE_ENV)
       }
     }),
     new HtmlWebpackPlugin({
@@ -61,7 +82,6 @@ var config = {
       output: { comments: false },
       sourceMap: true
     }),
-    new DashboardPlugin(),
     new webpack.LoaderOptionsPlugin({
       options: {
         tslint: {
@@ -69,14 +89,11 @@ var config = {
           failOnHint: true
         }
       }
+    }),
+    new CompressionPlugin({
+      test: /\.js|\.html|\.css/
     })
-  ],
-  devServer: {
-    contentBase: path.join(__dirname, "dist/"),
-    compress: true,
-    port: 3000,
-    hot: true
-  }
+  ]
 }
 
 module.exports = config

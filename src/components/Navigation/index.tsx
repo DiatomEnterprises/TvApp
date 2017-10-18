@@ -3,10 +3,12 @@ import * as classNames from "classnames"
 import { route } from "preact-router"
 import { Match } from "preact-router/match"
 
+import "./Navigation.scss"
+
 interface LinkProps {
+  path: string
   className: string
   activeClassName: string
-  path: string
   children?: JSX.Element
 }
 
