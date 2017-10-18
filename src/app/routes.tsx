@@ -4,12 +4,14 @@ import { createHashHistory } from "history"
 import { Featured, Recent, CatchUp, Subscription, Collections, Browse } from "#pages"
 
 export const Routes = () => (
-  <Router history={createHashHistory()}>
-    <Featured default path="/featured" />
-    <Recent path="/recent" />
-    <CatchUp path="/catch-up" />
-    <Subscription path="/subscription" />
-    <Collections path="/collections" />
-    <Browse path="/browse" />
-  </Router>
+  <div className="c-content">
+    <Router history={createHashHistory()}>
+      <Featured default path="/featured" />
+      <Recent path="/recent" />
+      <CatchUp path="/catch-up" />
+      <Subscription path="/subscription" />
+      <Collections path="/collections" />
+      <Browse path="/browse" />
+    </Router>
+  </div>
 )

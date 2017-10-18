@@ -27,8 +27,8 @@ class KeyboardMapComponent extends Preact.Component<Reducers.Utils, {}> {
     }
   }
 
-  render({ children }: { children?: any } & Reducers.Utils) {
-    return <div>{children}</div>
+  render() {
+    return null
   }
 }
 
