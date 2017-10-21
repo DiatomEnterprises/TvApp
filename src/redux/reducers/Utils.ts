@@ -7,7 +7,7 @@ const initial: MyRedux.Reducers.Utils = {
 export default (state = initial, action: Redux.AnyAction): MyRedux.Reducers.Utils => {
   switch (action.type) {
     case UTILS_FOCUS_CHANGED:
-      return { ...state, focused: action.payload }
+      return { ...state, ...action.payload }
 
     default:
       return state

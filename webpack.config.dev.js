@@ -5,10 +5,11 @@ const DashboardPlugin = require("webpack-dashboard/plugin")
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
+const ANIMATIONS = process.env.ANIMATIONS || false
 const NODE_ENV = process.env.NODE_ENV || "development"
 
 const config = {
-  devtool: "source-map",
+  devtool: "eval",
   context: path.resolve("./src"),
   entry: {
     app: "./index.tsx",
@@ -62,7 +63,8 @@ const config = {
               {
                 loader: "sass-loader",
                 options: {
-                  sourceMap: true
+                  sourceMap: true,
+                  data: `$animations: ${ANIMATIONS};`
                 }
               },
               {

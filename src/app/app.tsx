@@ -5,7 +5,7 @@ import { Store } from "#redux/store"
 import { KeyboardMap, Navigation, Title } from "#components"
 import { Routes } from "./routes"
 
-import "./../styles/app.style.scss"
+import "./../styles/app.scss"
 
 export const App = () => {
   return (

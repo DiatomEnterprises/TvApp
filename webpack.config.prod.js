@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CompressionPlugin = require("compression-webpack-plugin")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
+const ANIMATIONS = process.env.ANIMATIONS || false
 const NODE_ENV = process.env.NODE_ENV || "development"
 
 const config = {
@@ -44,7 +45,8 @@ const config = {
             {
               loader: "sass-loader",
               options: {
-                sourceMap: true
+                sourceMap: true,
+                data: `$animations: ${ANIMATIONS};`
               }
             },
             {

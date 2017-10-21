@@ -35,3 +35,9 @@
   height: $size;
   z-index: -1;
 }
+
+@mixin animations {
+  @if $animations {
+    @content;
+  }
+}

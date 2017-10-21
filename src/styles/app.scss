@@ -52,7 +52,7 @@ body {
       width: map-get($main-sizes, content-width);
       min-height: map-get($main-sizes, content-height)/2;
 
-      & > div {
+      & > div:not(.c-collections) {
         @include center(both);
       }
     }

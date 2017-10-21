@@ -15,14 +15,29 @@
   @include float(right);
 }
 
+.t-tx--center {
+  text-align: center;
+}
+.t-tx--left {
+  text-align: left;
+}
+.t-tx--right {
+  text-align: right;
+}
+
 .h1 {
   font-size: 28px;
   font-weight: 500;
   color: $color-white;
 }
-
 .h2 {
+  font-size: 24px;
 }
-
 .h3 {
+  font-size: 22px;
+  color: $color-white;
+}
+.h4 {
+  color: $color-focused;
+  text-transform: uppercase;
 }

@@ -1,19 +1,11 @@
 import Preact from "#preact"
 import { connect } from "preact-redux"
-import * as classNames from "classnames"
 import { route } from "preact-router"
-import { Match } from "preact-router/match"
 
-import { TitleActions } from "#redux/actions"
+import { TitleActions, UtilsActions } from "#redux/actions"
+import { Link } from "./Link"
 
 import "./Navigation.scss"
-
-interface LinkProps {
-  path: string
-  className: string
-  activeClassName: string
-  children?: JSX.Element
-}
 
 const items = [
   { name: "Featured", path: "/featured" },
@@ -23,29 +15,27 @@ const items = [
   { name: "Collections", path: "/collections" },
   { name: "Browse", path: "/browse" }
 ]
-const Link = ({ className, activeClassName, path, children }: LinkProps) => (
-  <Match path={path}>
-    {({ matches }: { matches: boolean }) => (
-      <div onClick={() => route(path)} className={classNames(className, { [activeClassName]: matches })}>
-        <span>{children}</span>
-      </div>
-    )}
-  </Match>
-)
 
 const getPath = (path: string) => (path && path !== "/" ? path : items[0].path)
 
-class NavigationComponent extends Preact.Component<MyRedux.Dispatch.Props, {}> {
+class NavigationComponent extends Preact.Component<MyRedux.Dispatch.Props & MyRedux.Reducers.Utils, {}> {
   componentDidMount() {
     route(getPath(window.location.hash.substr(1)), true)
     this.props.dispatch(TitleActions.change("Catalogue", ""))
+  }
+
+  onClick = () => {
+    const { dispatch, focused } = this.props
+    if (focused !== "navigation") {
+      dispatch(UtilsActions.focus("navigation"))
+    }
   }
 
   render() {
     return (
       <div className="c-nav">
         {items.map(({ path, name }) => (
-          <Link path={path} className="c-nav__item" activeClassName="c-focused">
+          <Link path={path} className="c-nav__item" activeClassName="c-focused" onClick={this.onClick}>
             {name}
           </Link>
         ))}
@@ -54,4 +44,6 @@ class NavigationComponent extends Preact.Component<MyRedux.Dispatch.Props, {}> {
   }
 }
 
-export const Navigation = connect()(NavigationComponent as any)
+const mapStateToProps = ({ utils }: MyRedux.State) => ({ focused: utils.focused })
+
+export const Navigation = connect(mapStateToProps)(NavigationComponent as any)

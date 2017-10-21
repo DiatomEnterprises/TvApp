@@ -6,11 +6,25 @@ const Mapping: KeyboardMap.Map = {
   navigation: {
     selector: ".c-nav",
     up: ":prev",
-    down: ":next"
+    down: ":next",
+    right: "collections"
+  },
+  collections: {
+    selector: ".c-collections",
+    first: "navigation:4",
+    left: ":prev",
+    right: ":next"
   }
 }
 
-export const Execute = (map: keyof KeyboardMap.Map, control: keyof KeyboardMap.Controls) => {
+const handleMap = (map: KeyboardMap.MapKeys, child: number | string) => {
+  const controls = Mapping[map]
+  const element = document.querySelector(`${controls.selector}`)
+  if (!element) return
+  Events.click(element.children[child])
+}
+
+export const Execute = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Controls) => {
   const controls = Mapping[map]
   const action = controls[control]
   const element = document.querySelector(`${controls.selector} ${FOCUSED_CLASS}`)
@@ -21,6 +35,9 @@ export const Execute = (map: keyof KeyboardMap.Map, control: keyof KeyboardMap.C
       const sibling = element.previousElementSibling
       if (sibling) {
         Events.click(sibling)
+      } else if (controls.first) {
+        const [map, child] = controls.first.split(":")
+        handleMap(map as KeyboardMap.MapKeys, child)
       }
       return
     }
@@ -28,10 +45,15 @@ export const Execute = (map: keyof KeyboardMap.Map, control: keyof KeyboardMap.C
       const sibling = element.nextElementSibling as HTMLElement
       if (sibling) {
         Events.click(sibling)
+      } else if (controls.last) {
+        const [map, child] = controls.last.split(":")
+        handleMap(map as KeyboardMap.MapKeys, child)
       }
       return
     }
+    case undefined:
+      return
     default:
-      return console.error("Not implemented")
+      return handleMap(action as KeyboardMap.MapKeys, 0)
   }
 }
