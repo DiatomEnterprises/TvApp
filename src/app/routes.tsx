@@ -1,11 +1,14 @@
 import Preact from "#preact"
-import Router from "preact-router"
+import Router, { route } from "preact-router"
 import { createHashHistory } from "history"
 import { Featured, Recent, CatchUp, Subscription, Collections, Browse } from "#pages"
 
+const history = createHashHistory()
+history.listen((location, action) => action === "POP" && route(location.pathname, true))
+
 export const Routes = () => (
   <div className="c-content">
-    <Router history={createHashHistory()}>
+    <Router history={history}>
       <Featured default path="/featured" />
       <Recent path="/recent" />
       <CatchUp path="/catch-up" />
