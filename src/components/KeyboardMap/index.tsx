@@ -9,8 +9,8 @@ const keys = {
   40: "down"
 }
 
-class KeyboardMapComponent extends Preact.Component<Reducers.Utils, {}> {
-  constructor(props: Reducers.Utils) {
+class KeyboardMapComponent extends Preact.Component<MyRedux.Reducers.Utils, {}> {
+  constructor(props: MyRedux.Reducers.Utils) {
     super(props)
 
     this.onKeyUp = this.onKeyUp.bind(this)
@@ -32,7 +32,7 @@ class KeyboardMapComponent extends Preact.Component<Reducers.Utils, {}> {
   }
 }
 
-const mapStateToProps = ({ utils }: { utils: Reducers.Utils }) => ({
+const mapStateToProps = ({ utils }: MyRedux.State) => ({
   focused: utils.focused
 })
 

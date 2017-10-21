@@ -1,7 +1,10 @@
 import Preact from "#preact"
+import { connect } from "preact-redux"
 import * as classNames from "classnames"
 import { route } from "preact-router"
 import { Match } from "preact-router/match"
+
+import { TitleActions } from "#redux/actions"
 
 import "./Navigation.scss"
 
@@ -24,7 +27,7 @@ const Link = ({ className, activeClassName, path, children }: LinkProps) => (
   <Match path={path}>
     {({ matches }: { matches: boolean }) => (
       <div onClick={() => route(path)} className={classNames(className, { [activeClassName]: matches })}>
-        {children}
+        <span>{children}</span>
       </div>
     )}
   </Match>
@@ -32,9 +35,10 @@ const Link = ({ className, activeClassName, path, children }: LinkProps) => (
 
 const getPath = (path: string) => (path && path !== "/" ? path : items[0].path)
 
-export class Navigation extends Preact.Component<{}, {}> {
+class NavigationComponent extends Preact.Component<MyRedux.Dispatch.Props, {}> {
   componentDidMount() {
     route(getPath(window.location.hash.substr(1)), true)
+    this.props.dispatch(TitleActions.change("Catalogue", ""))
   }
 
   render() {
@@ -49,3 +53,5 @@ export class Navigation extends Preact.Component<{}, {}> {
     )
   }
 }
+
+export const Navigation = connect()(NavigationComponent as any)

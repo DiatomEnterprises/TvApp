@@ -1,0 +1,25 @@
+@mixin center($direction) {
+  position: absolute;
+
+  @if $direction == "vertical" {
+    top: 50%;
+    transform: translateY(-50%);
+  } @else if $direction == "horizontal" {
+    left: 50%;
+    transform: translateX(-50%);
+  } @else if $direction == "both" {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@mixin float($direction) {
+  position: absolute;
+
+  @if $direction == "left" {
+    left: 0;
+  } @else if $direction == "right" {
+    right: 0;
+  }
+}

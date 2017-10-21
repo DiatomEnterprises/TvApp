@@ -1,3 +1,13 @@
-.c-nav {
-  background-color: red;
+.c-nav .c-nav__item {
+  font-size: 18px;
+  display: inline-block;
+  padding: 10px $size-nav-item-padding;
+  border-radius: $size-nav-item-padding;
+
+  &.c-focused {
+    font-weight: 500;
+    color: $color-font-focused;
+    background-color: $color-focused;
+    box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.75);
+  }
 }

@@ -1,0 +1,28 @@
+.center__vertical {
+  @include center(vertical);
+}
+.center__horizontal {
+  @include center(horizontal);
+}
+.center__both {
+  @include center(both);
+}
+
+.float__left {
+  @include float(left);
+}
+.float__right {
+  @include float(right);
+}
+
+.h1 {
+  font-size: 28px;
+  font-weight: 500;
+  color: $color-white;
+}
+
+.h2 {
+}
+
+.h3 {
+}

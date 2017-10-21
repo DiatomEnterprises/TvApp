@@ -1,0 +1,24 @@
+$color-focused: #ffde39;
+$color-bg-grey: #232b32;
+$color-font-main: #969592;
+$color-font-focused: #0a0a0c;
+
+$color-white: #ffffff;
+
+$size-nav-item-padding: 20px;
+
+$main-sizes: (
+  max-width: 1280px,
+  max-height: 720px,
+  padding-top: 100px,
+  padding-left: 100px,
+  nav-width: 200px,
+  title-height: 100px
+);
+
+$content-sizes: (
+  content-width: map-get($main-sizes, max-width) - map-get($main-sizes, nav-width) - map-get($main-sizes, padding-left),
+  content-height: map-get($main-sizes, max-height) - map-get($main-sizes, title-height) - map-get($main-sizes, padding-top)
+);
+
+$main-sizes: map-merge($main-sizes, $content-sizes);

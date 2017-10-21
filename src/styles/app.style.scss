@@ -1,0 +1,45 @@
+@import "./prototype";
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: $color-font-main;
+  font-family: Roboto;
+}
+
+.c-container__wrapper {
+  background-color: #bada55;
+  width: map-get($main-sizes, max-width);
+  height: map-get($main-sizes, max-height);
+
+  .c-container {
+    padding-top: map-get($main-sizes, padding-top);
+    padding-left: map-get($main-sizes, padding-left);
+
+    .c-title {
+      height: map-get($main-sizes, title-height);
+    }
+
+    .c-nav {
+      display: inline-block;
+      width: map-get($main-sizes, nav-width);
+    }
+
+    .c-content {
+      display: inline-block;
+      vertical-align: top;
+      width: map-get($main-sizes, content-width);
+      min-height: map-get($main-sizes, content-height)/2;
+
+      & > div {
+        @include center(both);
+      }
+    }
+  }
+}

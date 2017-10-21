@@ -64,6 +64,12 @@ const config = {
                 options: {
                   sourceMap: true
                 }
+              },
+              {
+                loader: "sass-resources-loader",
+                options: {
+                  resources: [path.resolve("src/styles/utils.scss")]
+                }
               }
             ]
           })
