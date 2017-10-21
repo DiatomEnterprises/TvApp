@@ -23,3 +23,15 @@
     right: 0;
   }
 }
+
+@mixin overlay($size, $color, $opacity) {
+  content: "";
+  position: absolute;
+  border: 280px solid $color;
+  border-radius: 50%;
+  opacity: $opacity;
+
+  width: $size;
+  height: $size;
+  z-index: -1;
+}

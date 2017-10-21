@@ -15,12 +15,20 @@ body {
 
 .c-container__wrapper {
   background-color: #bada55;
+  overflow: hidden;
   width: map-get($main-sizes, max-width);
   height: map-get($main-sizes, max-height);
 
   .c-container {
     padding-top: map-get($main-sizes, padding-top);
     padding-left: map-get($main-sizes, padding-left);
+
+    &:before {
+      $size: 1440px;
+      @include overlay($size, black, 0.3);
+      top: -$size/2.245;
+      left: -$size*1.333;
+    }
 
     .c-title {
       height: map-get($main-sizes, title-height);
@@ -29,6 +37,13 @@ body {
     .c-nav {
       display: inline-block;
       width: map-get($main-sizes, nav-width);
+
+      &:after {
+        $size: 2000px;
+        @include overlay($size, black, 0.4);
+        top: -$size/2.17;
+        left: -$size*1.1;
+      }
     }
 
     .c-content {
