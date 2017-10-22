@@ -1,4 +1,5 @@
 import Preact from "#preact"
+import { route } from "preact-router"
 import * as classNames from "classnames"
 
 import collections from "./data"
@@ -28,7 +29,11 @@ export class Collections extends Preact.Component<{}, Collections.State> {
   }
 
   onClick(index: number) {
-    this.setState({ current: index })
+    if (index === this.state.current) {
+      route(`/collections/view/${collections[index].id}`)
+    } else {
+      this.setState({ current: index })
+    }
   }
 
   renderItem = (item: Collections.Item, index: number) => {

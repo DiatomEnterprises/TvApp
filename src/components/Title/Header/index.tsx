@@ -5,7 +5,7 @@ class HeaderComponent extends Preact.Component<MyRedux.Reducers.Title, {}> {
   render({ header, description }: MyRedux.Reducers.Title) {
     return (
       <div className="c-header float__left center__vertical">
-        {description && <div className="c-header__description">{description}</div>}
+        {description && <div className="c-header__description h4">{description}</div>}
         <div className="c-header__title h1">{header}</div>
       </div>
     )

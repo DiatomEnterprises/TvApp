@@ -7,13 +7,18 @@ const Mapping: KeyboardMap.Map = {
     selector: ".c-nav",
     up: ":prev",
     down: ":next",
-    right: "collections"
+    right: "collections",
+    enter: "collections"
   },
   collections: {
     selector: ".c-collections",
     first: "navigation:4",
     left: ":prev",
-    right: ":next"
+    right: ":next",
+    enter: ":current"
+  },
+  "collections/view": {
+    selector: "."
   }
 }
 
@@ -31,6 +36,9 @@ export const Execute = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Con
   if (!element) return
 
   switch (action) {
+    case ":current": {
+      return Events.click(element)
+    }
     case ":prev": {
       const sibling = element.previousElementSibling
       if (sibling) {

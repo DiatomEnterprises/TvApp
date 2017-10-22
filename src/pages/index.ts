@@ -1,6 +1,7 @@
 export * from "./Browse"
 export * from "./CatchUp"
 export * from "./Collections"
+export * from "./CollectionsView"
 export * from "./Featured"
 export * from "./Recent"
 export * from "./Subscription"

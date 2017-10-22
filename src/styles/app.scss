@@ -14,13 +14,12 @@ body {
 }
 
 .c-container__wrapper {
-  background-color: #bada55;
+  background-color: #3e3a29;
   overflow: hidden;
   width: map-get($main-sizes, max-width);
   height: map-get($main-sizes, max-height);
 
   .c-container {
-    padding-top: map-get($main-sizes, padding-top);
     padding-left: map-get($main-sizes, padding-left);
 
     &:before {
@@ -31,6 +30,8 @@ body {
     }
 
     .c-title {
+      margin-top: map-get($main-sizes, padding-top)/2;
+      margin-bottom: map-get($main-sizes, padding-top)/2;
       height: map-get($main-sizes, title-height);
     }
 
@@ -44,6 +45,10 @@ body {
         top: -$size/2.17;
         left: -$size*1.1;
       }
+    }
+
+    &.c-container--full .c-content {
+      width: map-get($main-sizes, content-width) + map-get($main-sizes, nav-width);
     }
 
     .c-content {

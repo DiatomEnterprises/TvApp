@@ -1,7 +1,7 @@
 import Preact from "#preact"
 import Router, { route } from "preact-router"
 import { createHashHistory } from "history"
-import { Featured, Recent, CatchUp, Subscription, Collections, Browse } from "#pages"
+import { Featured, Recent, CatchUp, Subscription, Collections, CollectionsView, Browse } from "#pages"
 
 const history = createHashHistory()
 history.listen((location, action) => action === "POP" && route(location.pathname, true))
@@ -14,6 +14,7 @@ export const Routes = () => (
       <CatchUp path="/catch-up" />
       <Subscription path="/subscription" />
       <Collections path="/collections" />
+      <CollectionsView path="/collections/view/:id" />
       <Browse path="/browse" />
     </Router>
   </div>

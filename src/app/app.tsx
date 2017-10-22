@@ -1,24 +1,41 @@
 import Preact from "#preact"
-import { Provider } from "preact-redux"
+import * as classNames from "classnames"
+import { Provider, connect } from "preact-redux"
 
 import { Store } from "#redux/store"
-import { KeyboardMap, Navigation, Title } from "#components"
+import { BackButton, KeyboardMap, Navigation, Title } from "#components"
 import { Routes } from "./routes"
 
 import "./../styles/app.scss"
 
-export const App = () => {
-  return (
-    <Provider store={Store}>
+class AppComponent extends Preact.Component<MyRedux.Reducers.Utils, {}> {
+  render() {
+    const { navigationShow } = this.props
+
+    return (
       <div className="c-container__wrapper center__both">
-        <div className="c-container">
-          <KeyboardMap />
+        <KeyboardMap />
+
+        <div className={classNames("c-container", { "c-container--full": !navigationShow })}>
+          <BackButton />
 
           <Title />
-          <Navigation />
+          {navigationShow && <Navigation />}
           <Routes />
         </div>
       </div>
+    )
+  }
+}
+
+const mapStateToProps = ({ utils }: MyRedux.State) => ({ navigationShow: utils.navigationShow })
+
+const AppWrapper = connect(mapStateToProps)(AppComponent as any)
+
+export const App = () => {
+  return (
+    <Provider store={Store}>
+      <AppWrapper />
     </Provider>
   )
 }

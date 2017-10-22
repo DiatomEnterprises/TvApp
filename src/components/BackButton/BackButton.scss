@@ -1,0 +1,15 @@
+.c-back_button {
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  margin-left: 15px;
+  border-radius: 50%;
+  background-color: $color-bg-grey;
+  box-shadow: $box-shadow;
+
+  span {
+    display: block;
+    padding-bottom: 3px;
+    padding-right: 3px;
+  }
+}
