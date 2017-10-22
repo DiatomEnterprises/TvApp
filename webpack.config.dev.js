@@ -115,7 +115,8 @@ const config = {
         tslint: {
           emitErrors: true,
           failOnHint: true
-        }
+        },
+        context: path.resolve("./src")
       }
     })
   ],

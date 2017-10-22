@@ -36,7 +36,7 @@ class CollectionsComponent extends Preact.Component<Collections.Props, Collectio
     }
   }
 
-  render({ path }: Collections.Props, { current }: Collections.State) {
+  render({  }: Collections.Props, { current }: Collections.State) {
     return (
       <div className="c-collections">
         {collections.map((item: CollectionItem.Item, index) => (
@@ -49,4 +49,6 @@ class CollectionsComponent extends Preact.Component<Collections.Props, Collectio
 
 const mapStateToProps = ({ utils }: MyRedux.State) => ({ focused: utils.focused })
 
-export const Collections = connect(mapStateToProps)(CollectionsComponent as any)
+const CollectionsConnect = connect(mapStateToProps)(CollectionsComponent as any)
+
+export const Collections: Router.Route = () => <CollectionsConnect />
