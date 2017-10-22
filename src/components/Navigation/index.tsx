@@ -2,7 +2,7 @@ import Preact from "#preact"
 import { connect } from "preact-redux"
 import { route } from "preact-router"
 
-import { TitleActions, UtilsActions } from "#redux/actions"
+import { TitleActions } from "#redux/actions"
 import { Link } from "./Link"
 
 import "./Navigation.scss"
@@ -18,24 +18,17 @@ const items = [
 
 const getPath = (path: string) => (path && path !== "/" ? path : items[0].path)
 
-class NavigationComponent extends Preact.Component<MyRedux.Dispatch.Props & MyRedux.Reducers.Utils, {}> {
+class NavigationComponent extends Preact.Component<MyRedux.Dispatch.Props, {}> {
   componentDidMount() {
     route(getPath(window.location.hash.substr(1)), true)
     this.props.dispatch(TitleActions.change("Catalogue", ""))
-  }
-
-  onClick = () => {
-    const { dispatch, focused } = this.props
-    if (focused !== "navigation") {
-      dispatch(UtilsActions.focus("navigation"))
-    }
   }
 
   render() {
     return (
       <div className="c-nav">
         {items.map(({ path, name }) => (
-          <Link path={path} className="c-nav__item" activeClassName="c-focused" onClick={this.onClick}>
+          <Link path={path} className="c-nav__item" activeClassName="c-focused">
             {name}
           </Link>
         ))}
@@ -44,6 +37,4 @@ class NavigationComponent extends Preact.Component<MyRedux.Dispatch.Props & MyRe
   }
 }
 
-const mapStateToProps = ({ utils }: MyRedux.State) => ({ focused: utils.focused })
-
-export const Navigation = connect(mapStateToProps)(NavigationComponent as any)
+export const Navigation = connect()(NavigationComponent as any)

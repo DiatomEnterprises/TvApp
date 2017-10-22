@@ -2,6 +2,7 @@ import Preact from "#preact"
 import * as classNames from "classnames"
 import { route } from "preact-router"
 import { Match } from "preact-router/match"
+import { Focusable } from "#components"
 
 namespace Link {
   export interface Props {
@@ -26,9 +27,13 @@ export class Link extends Preact.Component<Link.Props, {}> {
     return (
       <Match path={path}>
         {({ matches }: { matches: boolean }) => (
-          <div onClick={this.onClick} className={classNames(className, { [activeClassName]: matches })}>
+          <Focusable
+            onClick={this.onClick}
+            className={classNames(className, { [activeClassName]: matches })}
+            map="navigation"
+          >
             {children}
-          </div>
+          </Focusable>
         )}
       </Match>
     )
