@@ -1,5 +1,5 @@
 import "classnames"
-import "history"
+import "history/createHashHistory"
 import "preact"
 import "preact-redux"
 import "preact-router"

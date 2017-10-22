@@ -19,7 +19,7 @@ class KeyboardMapComponent extends Preact.Component<MyRedux.Reducers.Utils, {}> 
 
   onKeyUp = (event: KeyboardEvent) => {
     const key = keys[event.keyCode]
-    if (key) {
+    if (key && this.props.focused) {
       Execute(this.props.focused, key)
     }
   }

@@ -1,6 +1,6 @@
 import Preact from "#preact"
 import Router, { route } from "preact-router"
-import { createHashHistory } from "history"
+import createHashHistory from "history/createHashHistory"
 import { Featured, Recent, CatchUp, Subscription, Collections, CollectionsView, Browse } from "#pages"
 
 const history = createHashHistory()
