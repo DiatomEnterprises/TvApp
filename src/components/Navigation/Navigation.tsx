@@ -2,19 +2,11 @@ import Preact from "#preact"
 import { connect } from "preact-redux"
 import { route } from "preact-router"
 
+import { Link } from "#components"
 import { TitleActions } from "#redux/actions"
-import { Link } from "./Link"
+import items from "./data"
 
 import "./Navigation.scss"
-
-const items = [
-  { name: "Featured", path: "/featured" },
-  { name: "Recently Added", path: "/recent" },
-  { name: "Best of Catch-Up", path: "/catch-up" },
-  { name: "Subscription", path: "/subscription" },
-  { name: "Collections", path: "/collections" },
-  { name: "Browse", path: "/browse" }
-]
 
 const getPath = (path: string) => (path && path !== "/" ? path : items[0].path)
 

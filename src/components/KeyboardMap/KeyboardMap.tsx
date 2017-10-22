@@ -10,17 +10,11 @@ const keys = {
 }
 
 class KeyboardMapComponent extends Preact.Component<MyRedux.Reducers.Utils, {}> {
-  constructor(props: MyRedux.Reducers.Utils) {
-    super(props)
-
-    this.onKeyUp = this.onKeyUp.bind(this)
-  }
-
   componentDidMount() {
     window.addEventListener("keyup", this.onKeyUp)
   }
 
-  onKeyUp(event: KeyboardEvent) {
+  onKeyUp = (event: KeyboardEvent) => {
     const key = keys[event.keyCode]
     if (key) {
       Execute(this.props.focused, key)
@@ -32,8 +26,6 @@ class KeyboardMapComponent extends Preact.Component<MyRedux.Reducers.Utils, {}> 
   }
 }
 
-const mapStateToProps = ({ utils }: MyRedux.State) => ({
-  focused: utils.focused
-})
+const mapStateToProps = ({ utils }: MyRedux.State) => ({ focused: utils.focused })
 
 export const KeyboardMap = connect(mapStateToProps)(KeyboardMapComponent as any)

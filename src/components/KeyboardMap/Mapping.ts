@@ -42,7 +42,7 @@ export const Execute = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Con
       return
     }
     case ":next": {
-      const sibling = element.nextElementSibling as HTMLElement
+      const sibling = element.nextElementSibling
       if (sibling) {
         Events.click(sibling)
       } else if (controls.last) {
