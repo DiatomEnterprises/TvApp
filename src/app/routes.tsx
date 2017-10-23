@@ -13,7 +13,7 @@ export const Routes = () => (
       <Recent path="/recent" />
       <CatchUp path="/catch-up" />
       <Subscription path="/subscription" />
-      <Collections path="/collections" />
+      <Collections path="/collections/:id?" />
       <CollectionsView path="/collections/view/:id" />
       <Browse path="/browse" />
     </Router>

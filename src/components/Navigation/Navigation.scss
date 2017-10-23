@@ -1,13 +1,33 @@
-.c-nav .c-nav__item {
-  font-size: 18px;
-  display: inline-block;
-  padding: 10px $size-nav-item-padding;
-  border-radius: $size-nav-item-padding;
+.c-nav__wrapper {
+  @include animations {
+    transition: opacity 0.4s;
+    &::after {
+      transition: transform 0.4s;
+    }
+  }
 
-  &.c-focused {
-    font-weight: 500;
-    color: $color-font-focused;
-    background-color: $color-focused;
-    box-shadow: $box-shadow;
+  &.c-nav__wrapper--hidden {
+    opacity: 0;
+    &::after {
+      transform: translate(-360px);
+    }
+
+    .c-nav {
+      display: none;
+    }
+  }
+
+  .c-nav .c-nav__item {
+    font-size: 18px;
+    display: inline-block;
+    padding: 10px $size-nav-item-padding;
+    border-radius: $size-nav-item-padding;
+
+    &.c-focused {
+      font-weight: 500;
+      color: $color-font-focused;
+      background-color: $color-focused;
+      box-shadow: $box-shadow;
+    }
   }
 }

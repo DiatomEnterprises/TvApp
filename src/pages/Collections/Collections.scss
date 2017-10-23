@@ -13,8 +13,8 @@
       transition: transform 0.3s, opacity 0.3s;
     }
 
-    &:not(.c-focused) .c-item__content * {
-      display: none;
+    &.c-focused .c-item__content {
+      background-color: darken($color-focused, 35%);
     }
 
     .c-card,

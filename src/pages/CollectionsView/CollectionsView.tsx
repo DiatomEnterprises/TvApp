@@ -3,7 +3,6 @@ import { connect } from "preact-redux"
 import * as classNames from "classnames"
 
 // import collections from "./data"
-import { Slider } from "#components"
 import { TitleActions, UtilsActions } from "#redux/actions"
 
 // import "./Collections.scss"

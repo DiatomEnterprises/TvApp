@@ -44,7 +44,6 @@ declare namespace MyRedux {
     }
     export interface Utils {
       focused?: keyof KeyboardMap.Map
-      navigationShow?: boolean
     }
   }
 }

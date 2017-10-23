@@ -22,7 +22,7 @@ body {
   .c-container {
     padding-left: map-get($main-sizes, padding-left);
 
-    &:before {
+    &::before {
       $size: 1440px;
       @include overlay($size, black, 0.3);
       top: -$size/2.245;
@@ -35,11 +35,11 @@ body {
       height: map-get($main-sizes, title-height);
     }
 
-    .c-nav {
+    .c-nav__wrapper {
       display: inline-block;
       width: map-get($main-sizes, nav-width);
 
-      &:after {
+      &::after {
         $size: 2000px;
         @include overlay($size, black, 0.4);
         top: -$size/2.17;

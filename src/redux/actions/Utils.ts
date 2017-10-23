@@ -8,11 +8,4 @@ const focus = (focused: KeyboardMap.MapKeys): MyRedux.Dispatch.Params<MyRedux.Re
   }
 }
 
-const navigation = (navigationShow: boolean): MyRedux.Dispatch.Params<MyRedux.Reducers.Utils> => {
-  return {
-    type: UTILS_NAVIGATION_CHANGE,
-    payload: { navigationShow }
-  }
-}
-
-export const UtilsActions = { focus, navigation }
+export const UtilsActions = { focus }

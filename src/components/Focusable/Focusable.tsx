@@ -4,14 +4,12 @@ import { connect } from "preact-redux"
 import { UtilsActions } from "#redux/actions"
 
 namespace Focusable {
-  type ReduxProps = MyRedux.Dispatch.Props & MyRedux.Reducers.Utils
+  type ReduxProps = JSX.HTMLAttributes & MyRedux.Dispatch.Props & MyRedux.Reducers.Utils
   export interface Props extends ReduxProps {
     map: KeyboardMap.MapKeys
     children?: JSX.Element[]
-    className?: string
-    onClick?: Function
+    onClick?: JSX.EventHandler<any>
     onReset?: Function
-    style?: object
   }
 }
 
@@ -25,14 +23,15 @@ class FocusableComponent extends Preact.Component<Focusable.Props, {}> {
 
   onClick = () => {
     const { dispatch, focused, map, onClick } = this.props
-    onClick && onClick()
+    onClick && onClick(null)
 
     if (focused !== map) {
       dispatch(UtilsActions.focus(map))
     }
   }
 
-  render({ children, className, style }: Focusable.Props) {
+  render() {
+    const { children, className, style } = this.props
     return (
       <div className={className} onClick={this.onClick} style={style}>
         {children}

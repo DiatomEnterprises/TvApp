@@ -1,8 +1,7 @@
 import { UTILS_FOCUS_CHANGED, UTILS_NAVIGATION_CHANGE } from "#redux/actions"
 
 const initial: MyRedux.Reducers.Utils = {
-  focused: "navigation",
-  navigationShow: true
+  focused: undefined
 }
 
 export default (state = initial, action: Redux.AnyAction): MyRedux.Reducers.Utils => {

@@ -3,6 +3,8 @@
     "class-name": true,
     "comment-format": [true, "check-space"],
     "indent": [true, "spaces"],
+    "no-unused-variable": true,
+    "no-unused-expression": true,
     "no-duplicate-variable": true,
     "no-eval": true,
     "no-internal-module": true,

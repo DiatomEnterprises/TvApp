@@ -3,7 +3,7 @@ import { route } from "preact-router"
 import * as classNames from "classnames"
 
 import collections from "./data"
-import { Slider } from "#components"
+import { Link } from "#components"
 
 import "./Collections.scss"
 
@@ -12,44 +12,56 @@ namespace Collections {
     current: null | number
   }
   export interface Item {
+    id: number
     name: string
     length: number
+  }
+}
+
+const sliderStyle = (index: number, current: number, direction: "X" | "Y" = "X", size: number = 500) => {
+  const modifier = current > 0 ? current - 1 : current
+  if (index < modifier && current > 1) {
+    return { display: "none" }
+  } else {
+    return { transform: `translate${direction}(${(index - modifier) * size}px)` }
   }
 }
 
 export class Collections extends Preact.Component<{}, Collections.State> {
   constructor() {
     super()
-
-    this.state = { current: null }
+    const [, parsed] = window.location.hash.split("#/collections/")
+    const id = parseInt(parsed, 10)
+    const index = collections.findIndex(item => item.id === id)
+    this.state = { current: index === -1 ? null : index }
   }
 
   onReset = () => {
     this.setState({ current: null })
   }
 
-  onClick(index: number) {
+  onClick(index: number, path: string) {
     if (index === this.state.current) {
-      route(`/collections/view/${collections[index].id}`)
+      route(`/collections/${collections[index].id}/view`)
     } else {
       this.setState({ current: index })
     }
   }
 
   renderItem = (item: Collections.Item, index: number) => {
-    const { current } = this.state
-    const props: Slider.Props = {
-      className: classNames("c-collections__item", { "c-focused": current === index }),
-      onClick: this.onClick.bind(this, index),
+    const style = sliderStyle(index, this.state.current || 0)
+    const props: Link.Props = {
+      style,
+      map: "collections",
+      path: `/collections/${item.id}`,
+      className: "c-collections__item",
+      activeClassName: "c-focused",
       onReset: this.onReset,
-      modifier: index - (current || 0),
-      direction: "X",
-      size: 500,
-      map: "collections"
+      onClick: this.onClick.bind(this, index)
     }
 
     return (
-      <Slider {...props}>
+      <Link {...props}>
         <div className="c-item__content">
           <div className="float__right c-item__length">{item.length}</div>
 
@@ -61,7 +73,7 @@ export class Collections extends Preact.Component<{}, Collections.State> {
 
         <div className="c-card" />
         <div className="c-card" />
-      </Slider>
+      </Link>
     )
   }
 

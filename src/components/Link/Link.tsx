@@ -1,41 +1,63 @@
 import Preact from "#preact"
+import { connect } from "preact-redux"
 import * as classNames from "classnames"
 import { route } from "preact-router"
 import { Match } from "preact-router/match"
 import { Focusable } from "#components"
 
-namespace Link {
+import { UtilsActions } from "#redux/actions"
+
+export namespace Link {
   export interface Props {
     path: string
     className: string
     activeClassName: string
+    map: KeyboardMap.MapKeys
     children?: JSX.Element[]
-    onClick?: Function
+    onClick?: JSX.EventHandler<any>
+    onReset?: Function
+    style?: any
   }
+  export interface WithRedux extends Props, MyRedux.Dispatch.Props, MyRedux.Reducers.Utils {}
 }
 
-export class Link extends Preact.Component<Link.Props, {}> {
-  onClick = () => {
-    const { path, onClick } = this.props
-    if (window.location.hash.indexOf(path) === -1) {
-      route(path)
+class LinkComponent extends Preact.Component<Link.WithRedux, {}> {
+  componentWillReceiveProps(next: Link.WithRedux) {
+    const { focused, onReset, map } = this.props
+    if (next.focused !== map && next.focused !== focused) {
+      onReset && onReset()
     }
-    onClick && onClick(path)
   }
 
-  render({ className, activeClassName, path, children }: Link.Props) {
+  onClick = (event: MouseEvent) => {
+    const { path, onClick, map, dispatch, focused } = this.props
+    const hash = window.location.hash.slice(1)
+
+    if (hash !== path) {
+      route(path)
+    }
+    if (focused !== map) {
+      dispatch(UtilsActions.focus(map))
+    }
+
+    onClick && onClick(path)
+    event.preventDefault()
+  }
+
+  render() {
+    const { className, activeClassName, path, children, style } = this.props
     return (
       <Match path={path}>
         {({ matches }: { matches: boolean }) => (
-          <Focusable
-            onClick={this.onClick}
-            className={classNames(className, { [activeClassName]: matches })}
-            map="navigation"
-          >
+          <div style={style} onClick={this.onClick} className={classNames(className, { [activeClassName]: matches })}>
             {children}
-          </Focusable>
+          </div>
         )}
       </Match>
     )
   }
 }
+
+const mapStateToProps = ({ utils }: MyRedux.State) => ({ focused: utils.focused })
+
+export const Link = connect(mapStateToProps)(LinkComponent as any)
