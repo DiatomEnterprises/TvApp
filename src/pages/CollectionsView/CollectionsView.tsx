@@ -11,11 +11,6 @@ class CollectionsViewComponent extends Preact.Component<MyRedux.Dispatch.Props, 
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(TitleActions.change("Superheroes", "Collections"))
-    dispatch(UtilsActions.navigation(false))
-  }
-
-  componentWillUnmount() {
-    this.props.dispatch(UtilsActions.navigation(true))
   }
 
   render() {

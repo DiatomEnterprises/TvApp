@@ -21,7 +21,7 @@ namespace Collections {
 const sliderStyle = (index: number, current: number, direction: "X" | "Y" = "X", size: number = 500) => {
   const modifier = current > 0 ? current - 1 : current
   if (index < modifier && current > 1) {
-    return { display: "none" }
+    return { opacity: 0 }
   } else {
     return { transform: `translate${direction}(${(index - modifier) * size}px)` }
   }
