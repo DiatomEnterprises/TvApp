@@ -3,7 +3,6 @@ import { connect } from "preact-redux"
 import * as classNames from "classnames"
 import { route } from "preact-router"
 import { Match } from "preact-router/match"
-import { Focusable } from "#components"
 
 import { UtilsActions } from "#redux/actions"
 
@@ -14,7 +13,7 @@ export namespace Link {
     activeClassName: string
     map: KeyboardMap.MapKeys
     children?: JSX.Element[]
-    onClick?: JSX.EventHandler<any>
+    onClick?: Function
     onReset?: Function
     style?: any
   }
@@ -40,7 +39,7 @@ class LinkComponent extends Preact.Component<Link.WithRedux, {}> {
       dispatch(UtilsActions.focus(map))
     }
 
-    onClick && onClick(path)
+    onClick && onClick(path, hash)
     event.preventDefault()
   }
 

@@ -9,7 +9,7 @@ const ANIMATIONS = process.env.ANIMATIONS || false
 const NODE_ENV = process.env.NODE_ENV || "development"
 
 const config = {
-  devtool: "source-map",
+  devtool: "eval",
   context: path.resolve("./src"),
   entry: {
     app: "./index.tsx",

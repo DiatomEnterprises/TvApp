@@ -3,6 +3,12 @@ import { Events } from "#utils"
 const FOCUSED_CLASS = ".c-focused"
 
 const Mapping: KeyboardMap.Map = {
+  "back.collections": {
+    selector: ".c-back_button__wrapper",
+    enter: "navigation@4",
+    left: "navigation@4",
+    right: "collections"
+  },
   navigation: {
     selector: ".c-nav",
     up: ":prev",
@@ -12,7 +18,7 @@ const Mapping: KeyboardMap.Map = {
   },
   collections: {
     selector: ".c-collections",
-    first: "navigation:4",
+    first: "back.collections",
     left: ":prev",
     right: ":next",
     enter: ":current"
@@ -22,18 +28,29 @@ const Mapping: KeyboardMap.Map = {
   }
 }
 
-const handleMap = (map: KeyboardMap.MapKeys, child: number | string) => {
-  const controls = Mapping[map]
-  const element = document.querySelector(`${controls.selector}`)
-  if (!element) return
-  Events.click(element.children[child])
-}
-
 export const Execute = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Controls) => {
   const controls = Mapping[map]
   const action = controls[control]
+  if (!action) return
+
+  switch (true) {
+    case action.includes(":"):
+      return handleActions(controls, action as KeyboardMap.Actions)
+
+    case action.includes("@"):
+      const [map, child] = action.split("@")
+      return handleLinks(Mapping[map], child)
+
+    default:
+      handleMaps(Mapping[action])
+  }
+}
+
+const handleActions = (controls: KeyboardMap.Controls, action: KeyboardMap.Actions) => {
   const element = document.querySelector(`${controls.selector} ${FOCUSED_CLASS}`)
-  if (!element) return
+  if (!element) {
+    return throwElementError(controls.selector)
+  }
 
   switch (action) {
     case ":current": {
@@ -44,8 +61,7 @@ export const Execute = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Con
       if (sibling) {
         Events.click(sibling)
       } else if (controls.first) {
-        const [map, child] = controls.first.split(":")
-        handleMap(map as KeyboardMap.MapKeys, child)
+        handleMaps(Mapping[controls.first])
       }
       return
     }
@@ -54,14 +70,28 @@ export const Execute = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Con
       if (sibling) {
         Events.click(sibling)
       } else if (controls.last) {
-        const [map, child] = controls.last.split(":")
-        handleMap(map as KeyboardMap.MapKeys, child)
+        handleMaps(Mapping[controls.last])
       }
       return
     }
-    case undefined:
-      return
     default:
-      return handleMap(action as KeyboardMap.MapKeys, 0)
+      throw new Error(`Unhandled Action ${action}`)
   }
+}
+
+const handleLinks = (controls: KeyboardMap.Controls, child: number | string) => {
+  handleMaps(controls, child)
+}
+
+const handleMaps = (controls: KeyboardMap.Controls, child: number | string = 0) => {
+  const element = document.querySelector(`${controls.selector}`)
+  if (element) {
+    Events.click(element.children[child])
+  } else {
+    throwElementError(controls.selector)
+  }
+}
+
+const throwElementError = (selector: string) => {
+  throw new Error(`Can't find element ${selector}`)
 }

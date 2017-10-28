@@ -13,6 +13,8 @@ const matchRoute = (route: string): KeyboardMap.MapKeys => {
   switch (true) {
     case !!route.match(/collections\/\d/):
       return "collections"
+    case !!route.match(/collections\/back/):
+      return "back.collections"
     default:
       return "navigation"
   }

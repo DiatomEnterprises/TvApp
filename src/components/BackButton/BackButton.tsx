@@ -1,16 +1,34 @@
 import Preact from "#preact"
 
+import { Link } from "#components"
+import { Events } from "#utils"
+
 import "./BackButton.scss"
 
-const back = () => {
-  const length = (window.location.hash.match(/\//g) || []).length
-  if (length > 1) window.history.back()
-}
+const BACK_URL = "/collections/back"
 
-export const BackButton = () => {
-  return (
-    <div onClick={back} className="c-back_button center__vertical float__left">
-      <span className="center__both">◀</span>
-    </div>
-  )
+export class BackButton extends Preact.Component<{}, {}> {
+  onClick = (next: string, prev: string) => {
+    if (prev === BACK_URL) {
+      // Handle second click
+    }
+  }
+
+  render() {
+    const props = {
+      onClick: this.onClick,
+      path: BACK_URL,
+      map: "back.collections",
+      className: "c-back_button center__vertical float__left",
+      activeClassName: "c-focused"
+    }
+
+    return (
+      <div className="c-back_button__wrapper">
+        <Link {...props}>
+          <span className="center__both">◀</span>
+        </Link>
+      </div>
+    )
+  }
 }

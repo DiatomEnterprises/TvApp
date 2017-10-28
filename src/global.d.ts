@@ -1,22 +1,24 @@
 declare namespace KeyboardMap {
-  type SpecialActions = ":prev" | ":next" | ":current"
+  export type Links = "navigation@4"
+  export type Actions = ":prev" | ":next" | ":current"
   export type MapKeys = keyof Map
 
   export interface Map {
     navigation: Controls
     collections: Controls
+    "back.collections": Controls
     "collections/view": Controls
   }
   export interface Controls {
     selector: string
-    up?: SpecialActions | MapKeys
-    down?: SpecialActions | MapKeys
-    left?: SpecialActions | MapKeys
-    right?: SpecialActions | MapKeys
-    enter?: SpecialActions | MapKeys
+    up?: Actions | MapKeys | Links
+    down?: Actions | MapKeys | Links
+    left?: Actions | MapKeys | Links
+    right?: Actions | MapKeys | Links
+    enter?: Actions | MapKeys | Links
 
-    first?: string
-    last?: string
+    first?: Actions | MapKeys | Links
+    last?: Actions | MapKeys | Links
   }
 }
 
@@ -43,6 +45,7 @@ declare namespace MyRedux {
       description: string
     }
     export interface Utils {
+      back?: string
       focused?: keyof KeyboardMap.Map
     }
   }
