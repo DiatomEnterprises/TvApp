@@ -17,6 +17,13 @@
     }
   }
 
+  &:not(.c-nav__wrapper--hidden) {
+    margin-top: 50px;
+    .c-nav {
+      margin-left: -$size-nav-item-padding;
+    }
+  }
+
   .c-nav .c-nav__item {
     font-size: 18px;
     display: inline-block;

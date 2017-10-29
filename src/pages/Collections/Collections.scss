@@ -1,5 +1,10 @@
-.c-container:not(.c-container--full) .c-collections {
-  margin-left: 100px;
+.c-container {
+  &.c-container--full .c-collections {
+    transform: translateY(-19px);
+  }
+  &:not(.c-container--full) .c-collections {
+    margin-left: 100px;
+  }
 }
 
 .c-collections {

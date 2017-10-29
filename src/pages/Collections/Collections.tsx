@@ -6,7 +6,7 @@ import * as classNames from "classnames"
 import collections from "./data"
 import { Link } from "#components"
 import { Route } from "#utils"
-import { UtilsActions } from "#redux/actions"
+import { TitleActions, UtilsActions } from "#redux/actions"
 
 import "./Collections.scss"
 
@@ -44,6 +44,7 @@ class CollectionsComponent extends Preact.Component<Collections.Props, Collectio
     const { dispatch } = this.props
     const map = Route.routeToKeyboard(window.location.hash.slice(1))
 
+    dispatch(TitleActions.change("Catalogue", ""))
     dispatch(UtilsActions.focus(map))
     dispatch(UtilsActions.back("/collections/back", "back.collections"))
   }

@@ -56,10 +56,6 @@ body {
       vertical-align: top;
       width: map-get($main-sizes, content-width);
       min-height: map-get($main-sizes, content-height)/2;
-
-      & > div:not(.c-collections, .c-collection) {
-        @include center(both);
-      }
     }
   }
 }
