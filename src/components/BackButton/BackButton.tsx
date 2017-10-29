@@ -1,24 +1,28 @@
 import Preact from "#preact"
+import { connect } from "preact-redux"
 
 import { Link } from "#components"
 import { Events } from "#utils"
 
 import "./BackButton.scss"
 
-const BACK_URL = "/collections/back"
-
-export class BackButton extends Preact.Component<{}, {}> {
+export class BackButtonComponent extends Preact.Component<MyRedux.Reducers.Utils, {}> {
   onClick = (next: string, prev: string) => {
-    if (prev === BACK_URL) {
+    if (!this.props.back) return
+
+    if (prev === this.props.back.path) {
       // Handle second click
     }
   }
 
   render() {
+    if (!this.props.back) return null
+    const { path, map } = this.props.back
+
     const props = {
+      map,
+      path,
       onClick: this.onClick,
-      path: BACK_URL,
-      map: "back.collections",
       className: "c-back_button center__vertical float__left",
       activeClassName: "c-focused"
     }
@@ -32,3 +36,7 @@ export class BackButton extends Preact.Component<{}, {}> {
     )
   }
 }
+
+const mapStateToProps = ({ utils }: MyRedux.State) => ({ back: utils.back })
+
+export const BackButton = connect(mapStateToProps)(BackButtonComponent as any)

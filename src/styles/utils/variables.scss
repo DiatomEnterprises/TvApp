@@ -11,13 +11,14 @@ $main-sizes: (
   max-width: 1280px,
   max-height: 720px,
   padding-top: 100px,
-  padding-left: 100px,
+  padding-left: 120px,
+  padding-right: 60px,
   nav-width: 200px,
-  title-height: 100px
+  title-height: 60px
 );
 
 $content-sizes: (
-  content-width: map-get($main-sizes, max-width) - map-get($main-sizes, nav-width) - map-get($main-sizes, padding-left),
+  content-width: map-get($main-sizes, max-width) - map-get($main-sizes, nav-width) - map-get($main-sizes, padding-left) - map-get($main-sizes, padding-right),
   content-height: map-get($main-sizes, max-height) - map-get($main-sizes, title-height) - map-get($main-sizes, padding-top)
 );
 

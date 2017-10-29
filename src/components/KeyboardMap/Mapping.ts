@@ -1,3 +1,4 @@
+import { route } from "preact-router"
 import { Events } from "#utils"
 
 const FOCUSED_CLASS = ".c-focused"
@@ -8,6 +9,11 @@ const Mapping: KeyboardMap.Map = {
     enter: "navigation@4",
     left: "navigation@4",
     right: "collections"
+  },
+  "back.collections/view": {
+    selector: ".c-back_button__wrapper",
+    enter: "url/back",
+    left: "url/back"
   },
   navigation: {
     selector: ".c-nav",
@@ -34,6 +40,10 @@ export const Execute = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Con
   if (!action) return
 
   switch (true) {
+    case action.includes("url/"):
+      const [, url] = action.split("url")
+      return handleUrl(url)
+
     case action.includes(":"):
       return handleActions(controls, action as KeyboardMap.Actions)
 
@@ -44,6 +54,11 @@ export const Execute = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Con
     default:
       handleMaps(Mapping[action])
   }
+}
+
+const handleUrl = (url: string) => {
+  const path = window.location.hash.slice(1).replace(url, "")
+  route(path, true)
 }
 
 const handleActions = (controls: KeyboardMap.Controls, action: KeyboardMap.Actions) => {

@@ -1,0 +1,31 @@
+.c-button {
+  font-size: 18px;
+  text-align: center;
+  width: 200px;
+  padding: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: $size-nav-item-padding;
+
+  &.c-focused {
+    font-weight: 500;
+    color: $color-font-focused;
+    background-color: $color-focused;
+    box-shadow: $box-shadow;
+  }
+}
+
+.c-collection {
+  .c-collection__titles {
+    margin: -10px 0 10px;
+  }
+  .c-collection__description {
+    width: 45%;
+    color: white;
+  }
+
+  .c-collection__nav {
+    height: 35px;
+    position: relative;
+    margin: 20px 0;
+  }
+}

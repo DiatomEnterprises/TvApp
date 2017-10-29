@@ -21,6 +21,8 @@ body {
 
   .c-container {
     padding-left: map-get($main-sizes, padding-left);
+    padding-right: map-get($main-sizes, padding-right);
+    padding-top: map-get($main-sizes, padding-top)/2;
 
     &::before {
       $size: 1440px;
@@ -30,8 +32,6 @@ body {
     }
 
     .c-title {
-      margin-top: map-get($main-sizes, padding-top)/2;
-      margin-bottom: map-get($main-sizes, padding-top)/2;
       height: map-get($main-sizes, title-height);
     }
 
@@ -57,7 +57,7 @@ body {
       width: map-get($main-sizes, content-width);
       min-height: map-get($main-sizes, content-height)/2;
 
-      & > div:not(.c-collections) {
+      & > div:not(.c-collections, .c-collection) {
         @include center(both);
       }
     }

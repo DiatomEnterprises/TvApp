@@ -1,9 +1,13 @@
+.c-container:not(.c-container--full) .c-collections {
+  margin-left: 100px;
+}
+
 .c-collections {
   $size-width: 450px;
   $size-height: 300px;
 
   height: $size-height;
-  margin-left: 100px;
+  margin-top: map-get($main-sizes, padding-top)/2;
 
   .c-collections__item {
     width: $size-width;

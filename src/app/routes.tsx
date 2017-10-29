@@ -14,7 +14,8 @@ export const Routes = () => (
       <CatchUp path="/catch-up" />
       <Subscription path="/subscription" />
       <Collections path="/collections/:id?" />
-      <CollectionsView path="/collections/view/:id" />
+      <CollectionsView path="/collections/:id/view" />
+      <CollectionsView path="/collections/:id/back" />
       <Browse path="/browse" />
     </Router>
   </div>

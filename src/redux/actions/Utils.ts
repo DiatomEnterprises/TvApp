@@ -10,10 +10,10 @@ const focus = (focused: KeyboardMap.MapKeys): UtilParams => {
   }
 }
 
-const back = (back: string | undefined): UtilParams => {
+const back = (path: string, map: KeyboardMap.MapKeys): UtilParams => {
   return {
     type: UTILS_BACK_CHANGED,
-    payload: { back }
+    payload: { back: { path, map } }
   }
 }
 

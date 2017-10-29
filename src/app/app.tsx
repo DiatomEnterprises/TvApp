@@ -6,24 +6,16 @@ import { Store } from "#redux/store"
 import { UtilsActions } from "#redux/actions"
 import { BackButton, KeyboardMap, Navigation, Title } from "#components"
 import { Routes } from "./routes"
+import { Route } from "#utils"
 
 import "./../styles/app.scss"
 
-const matchRoute = (route: string): KeyboardMap.MapKeys => {
-  switch (true) {
-    case !!route.match(/collections\/\d/):
-      return "collections"
-    case !!route.match(/collections\/back/):
-      return "back.collections"
-    default:
-      return "navigation"
-  }
-}
-
 class AppComponent extends Preact.Component<MyRedux.Dispatch.Props & MyRedux.Reducers.Utils, {}> {
   componentDidMount() {
-    const map = matchRoute(window.location.hash.slice(1))
-    this.props.dispatch(UtilsActions.focus(map))
+    const map = Route.routeToKeyboard(window.location.hash.slice(1))
+    if (map === "navigation") {
+      this.props.dispatch(UtilsActions.focus(map))
+    }
   }
 
   render() {

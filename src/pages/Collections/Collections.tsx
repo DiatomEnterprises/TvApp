@@ -1,13 +1,17 @@
 import Preact from "#preact"
+import { connect } from "preact-redux"
 import { route } from "preact-router"
 import * as classNames from "classnames"
 
 import collections from "./data"
 import { Link } from "#components"
+import { Route } from "#utils"
+import { UtilsActions } from "#redux/actions"
 
 import "./Collections.scss"
 
 namespace Collections {
+  export interface Props extends MyRedux.Dispatch.Props {}
   export interface State {
     current: null | number
   }
@@ -27,13 +31,21 @@ const sliderStyle = (index: number, current: number, direction: "X" | "Y" = "X",
   }
 }
 
-export class Collections extends Preact.Component<{}, Collections.State> {
+class CollectionsComponent extends Preact.Component<Collections.Props, Collections.State> {
   constructor() {
     super()
     const [, parsed] = window.location.hash.split("#/collections/")
     const id = parseInt(parsed, 10)
     const index = collections.findIndex(item => item.id === id)
     this.state = { current: index === -1 ? null : index }
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props
+    const map = Route.routeToKeyboard(window.location.hash.slice(1))
+
+    dispatch(UtilsActions.focus(map))
+    dispatch(UtilsActions.back("/collections/back", "back.collections"))
   }
 
   onReset = () => {
@@ -81,3 +93,5 @@ export class Collections extends Preact.Component<{}, Collections.State> {
     return <div className="c-collections">{collections.map(this.renderItem)}</div>
   }
 }
+
+export const Collections = connect()(CollectionsComponent as any)
