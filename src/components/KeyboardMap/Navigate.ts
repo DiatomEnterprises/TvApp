@@ -1,41 +1,11 @@
 import { route } from "preact-router"
 import { Events } from "#utils"
 
+import { MapObject } from "./Map"
 const FOCUSED_CLASS = ".c-focused"
 
-const Mapping: KeyboardMap.Map = {
-  "back.collections": {
-    selector: ".c-back_button__wrapper",
-    enter: "navigation@4",
-    left: "navigation@4",
-    right: "collections"
-  },
-  "back.collections/view": {
-    selector: ".c-back_button__wrapper",
-    enter: "url/back",
-    left: "url/back"
-  },
-  navigation: {
-    selector: ".c-nav",
-    up: ":prev",
-    down: ":next",
-    right: "collections",
-    enter: "collections"
-  },
-  collections: {
-    selector: ".c-collections",
-    first: "back.collections",
-    left: ":prev",
-    right: ":next",
-    enter: ":current"
-  },
-  "collections/view": {
-    selector: "."
-  }
-}
-
-export const Execute = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Controls) => {
-  const controls = Mapping[map]
+export const Navigate = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Controls) => {
+  const controls = MapObject[map]
   const action = controls[control]
   if (!action) return
 
@@ -49,10 +19,10 @@ export const Execute = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Con
 
     case action.includes("@"):
       const [map, child] = action.split("@")
-      return handleLinks(Mapping[map], child)
+      return handleLinks(MapObject[map], child)
 
     default:
-      handleMaps(Mapping[action])
+      handleMaps(MapObject[action])
   }
 }
 
@@ -76,7 +46,7 @@ const handleActions = (controls: KeyboardMap.Controls, action: KeyboardMap.Actio
       if (sibling) {
         Events.click(sibling)
       } else if (controls.first) {
-        handleMaps(Mapping[controls.first])
+        handleMaps(MapObject[controls.first])
       }
       return
     }
@@ -85,7 +55,7 @@ const handleActions = (controls: KeyboardMap.Controls, action: KeyboardMap.Actio
       if (sibling) {
         Events.click(sibling)
       } else if (controls.last) {
-        handleMaps(Mapping[controls.last])
+        handleMaps(MapObject[controls.last])
       }
       return
     }

@@ -1,6 +1,6 @@
 declare namespace KeyboardMap {
   export type Url = "url/back"
-  export type Links = "navigation@4"
+  export type Links = "navigation@4" | "movies/view@0"
   export type Actions = ":prev" | ":next" | ":current"
   export type MapKeys = keyof Map
 
@@ -9,9 +9,10 @@ declare namespace KeyboardMap {
   export interface Map {
     navigation: Controls
     collections: Controls
-    "collections/view": Controls
+    "movies/view": Controls
+    "movies/nav": Controls
     "back.collections": Controls
-    "back.collections/view": Controls
+    "back.movies": Controls
   }
   export interface Controls {
     selector: string
