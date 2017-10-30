@@ -1,3 +1,9 @@
+const urlReplace = (prev: string, next: string) => {
+  const hash = window.location.hash.slice(1)
+  const path = hash.replace("/back", "").replace(prev, next)
+  return `url/${path}`
+}
+
 export const MapObject: KeyboardMap.Map = {
   "back.collections": {
     selector: ".c-back_button__wrapper",
@@ -7,8 +13,8 @@ export const MapObject: KeyboardMap.Map = {
   },
   "back.movies": {
     selector: ".c-back_button__wrapper",
-    enter: "url/back",
-    left: "url/back",
+    enter: urlReplace.bind(null, "movies/", "collections/"),
+    left: urlReplace.bind(null, "movies/", "collections/"),
     right: "movies/nav"
   },
   navigation: {

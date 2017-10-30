@@ -55,7 +55,7 @@ class CollectionsComponent extends Preact.Component<Collections.Props, Collectio
 
   onClick(index: number, path: string) {
     if (index === this.state.current) {
-      route(`/movies/${collections[index].id}/buy`)
+      route(`/movies/${collections[index].id}/buy`, true)
     } else {
       this.setState({ current: index })
     }

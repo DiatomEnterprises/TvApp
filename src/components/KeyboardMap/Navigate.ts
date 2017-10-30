@@ -6,12 +6,16 @@ const FOCUSED_CLASS = ".c-focused"
 
 export const Navigate = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Controls) => {
   const controls = MapObject[map]
-  const action = controls[control]
+  let action = controls[control]
   if (!action) return
+
+  if (typeof action === "function") {
+    action = action()
+  }
 
   switch (true) {
     case action.includes("url/"):
-      const [, url] = action.split("url")
+      const [, url] = action.split("url/")
       return handleUrl(url)
 
     case action.includes(":"):
@@ -26,10 +30,7 @@ export const Navigate = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Co
   }
 }
 
-const handleUrl = (url: string) => {
-  const path = window.location.hash.slice(1).replace(url, "")
-  route(path, true)
-}
+const handleUrl = (url: string) => route(url, true)
 
 const handleActions = (controls: KeyboardMap.Controls, action: KeyboardMap.Actions) => {
   const element = document.querySelector(`${controls.selector} ${FOCUSED_CLASS}`)

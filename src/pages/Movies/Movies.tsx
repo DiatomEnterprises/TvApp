@@ -16,7 +16,7 @@ namespace Movies {
   }
 
   export interface State {
-    collection: Collection | undefined
+    collection: Collection
     batches: Movie.Props[][]
     titles: number
   }
@@ -32,7 +32,13 @@ const initConstants = () => {
 class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.State> {
   constructor() {
     super()
-    this.state = { collection: undefined, batches: [], titles: 0 }
+    initConstants()
+
+    const collection = getCollection(constants.base)
+    if (collection) {
+      const state = getState(collection.id) as Movies.State
+      this.state = { ...state }
+    }
   }
 
   componentDidMount() {
@@ -42,12 +48,6 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
     dispatch(TitleActions.change(name, "Collections"))
     dispatch(UtilsActions.focus(Route.routeToKeyboard(constants.hash)))
     dispatch(UtilsActions.back(`${constants.base}/back`, "back.movies"))
-
-    const collection = getCollection(constants.base)
-    if (collection) {
-      const state = getState(collection.id) as Movies.State
-      this.setState(state)
-    }
   }
 
   renderBuyLink() {
@@ -72,7 +72,6 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
 
   render() {
     const { collection, batches, titles } = this.state
-    if (!collection) return null
 
     return (
       <div className="c-collection">

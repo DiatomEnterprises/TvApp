@@ -9,6 +9,7 @@
   &.c-focused {
     font-weight: 500;
     color: $color-font-focused;
+    border-color: $color-focused;
     background-color: $color-focused;
     box-shadow: $box-shadow;
   }

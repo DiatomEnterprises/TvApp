@@ -4,7 +4,9 @@ declare namespace KeyboardMap {
   export type Actions = ":prev" | ":next" | ":current"
   export type MapKeys = keyof Map
 
+  type StringFunc = () => string
   type ControlValue = Actions | MapKeys | Links | Url
+  type ExtraControlValue = ControlValue | StringFunc
 
   export interface Map {
     navigation: Controls
@@ -16,11 +18,11 @@ declare namespace KeyboardMap {
   }
   export interface Controls {
     selector: string
-    up?: ControlValue
-    down?: ControlValue
-    left?: ControlValue
-    right?: ControlValue
-    enter?: ControlValue
+    up?: ExtraControlValue
+    down?: ExtraControlValue
+    left?: ExtraControlValue
+    right?: ExtraControlValue
+    enter?: ExtraControlValue
 
     first?: ControlValue
     last?: ControlValue
