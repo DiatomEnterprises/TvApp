@@ -1,7 +1,7 @@
 declare namespace KeyboardMap {
   export type Url = "url/back"
-  export type Links = "navigation@4" | "movies/view@0"
-  export type Actions = ":prev" | ":next" | ":current"
+  export type Links = "navigation@4" | "movies/view@0" | "movies/nav@0" | "movies/nav@1"
+  export type Actions = ":prev" | ":next" | ":current" | ":complex"
   export type MapKeys = keyof Map
 
   type StringFunc = () => string

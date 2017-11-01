@@ -1,7 +1,7 @@
 import { route } from "preact-router"
 import { Events } from "#utils"
 
-import { MapObject } from "./Map"
+import { MapObject, MapComplex } from "./Map"
 const FOCUSED_CLASS = ".c-focused"
 
 export const Navigate = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Controls) => {
@@ -14,16 +14,20 @@ export const Navigate = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Co
   }
 
   switch (true) {
-    case action.includes("url/"):
+    case action.includes("url/"): {
       const [, url] = action.split("url/")
       return handleUrl(url)
+    }
 
-    case action.includes(":"):
-      return handleActions(controls, action as KeyboardMap.Actions)
+    case action.includes(":"): {
+      const data = { map, control }
+      return handleActions(controls, action as KeyboardMap.Actions, data)
+    }
 
-    case action.includes("@"):
+    case action.includes("@"): {
       const [map, child] = action.split("@")
       return handleLinks(MapObject[map], child)
+    }
 
     default:
       handleMaps(MapObject[action])
@@ -32,7 +36,11 @@ export const Navigate = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Co
 
 const handleUrl = (url: string) => route(url, true)
 
-const handleActions = (controls: KeyboardMap.Controls, action: KeyboardMap.Actions) => {
+const handleActions = (
+  controls: KeyboardMap.Controls,
+  action: KeyboardMap.Actions,
+  { map, control }: { map: KeyboardMap.MapKeys; control: keyof KeyboardMap.Controls }
+) => {
   const element = document.querySelector(`${controls.selector} ${FOCUSED_CLASS}`)
   if (!element) {
     return throwElementError(controls.selector)
@@ -60,6 +68,12 @@ const handleActions = (controls: KeyboardMap.Controls, action: KeyboardMap.Actio
       }
       return
     }
+    case ":complex":
+      const parent = element.parentElement as HTMLElement
+      const index = Array.from(parent.children).indexOf(element)
+      const complex = MapComplex[map][control][index] as KeyboardMap.Links
+      const [m, child] = complex.split("@")
+      return handleLinks(MapObject[m], child)
     default:
       throw new Error(`Unhandled Action ${action}`)
   }

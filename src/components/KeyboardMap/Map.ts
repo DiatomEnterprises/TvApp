@@ -1,7 +1,27 @@
-const urlReplace = (prev: string, next: string) => {
+const backUrl = (prev: string, next: string) => {
   const hash = window.location.hash.slice(1)
   const path = hash.replace("/back", "").replace(prev, next)
   return `url/${path}`
+}
+
+export const MapComplex = {
+  "movies/view": {
+    up: {
+      selector: "",
+      0: "movies/nav@0",
+      1: "movies/nav@0",
+      2: "movies/nav@0",
+      3: "movies/nav@1",
+      4: "movies/nav@1"
+    }
+  },
+  "movies/nav": {
+    down: {
+      selector: "",
+      0: "movies/view@0",
+      1: "movies/view@4"
+    }
+  }
 }
 
 export const MapObject: KeyboardMap.Map = {
@@ -13,8 +33,8 @@ export const MapObject: KeyboardMap.Map = {
   },
   "back.movies": {
     selector: ".c-back_button__wrapper",
-    enter: urlReplace.bind(null, "movies/", "collections/"),
-    left: urlReplace.bind(null, "movies/", "collections/"),
+    enter: backUrl.bind(null, "movies/", "collections/"),
+    left: backUrl.bind(null, "movies/", "collections/"),
     right: "movies/nav"
   },
   navigation: {
@@ -34,7 +54,7 @@ export const MapObject: KeyboardMap.Map = {
   "movies/view": {
     selector: ".c-movie__line",
     first: "back.movies",
-    up: "movies/nav",
+    up: ":complex",
     left: ":prev",
     right: ":next"
   },
@@ -43,6 +63,6 @@ export const MapObject: KeyboardMap.Map = {
     first: "back.movies",
     left: ":prev",
     right: ":next",
-    down: "movies/view@0"
+    down: ":complex"
   }
 }
