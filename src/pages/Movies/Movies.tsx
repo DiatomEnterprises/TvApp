@@ -19,6 +19,7 @@ namespace Movies {
     collection: Collection
     batches: Movie.Props[][]
     titles: number
+    name: string
   }
 }
 
@@ -37,7 +38,7 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
     const collection = getCollection(constants.base)
     if (collection) {
       const state = getState(collection.id) as Movies.State
-      this.state = { ...state }
+      this.state = { ...state, name: collection.name }
     }
   }
 
@@ -45,7 +46,7 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
     initConstants()
 
     const { dispatch } = this.props
-    dispatch(TitleActions.change(name, "Collections"))
+    dispatch(TitleActions.change(this.state.name, "Collections"))
     dispatch(UtilsActions.focus(Route.routeToKeyboard(constants.hash)))
     dispatch(UtilsActions.back(`${constants.base}/back`, "back.movies"))
   }
