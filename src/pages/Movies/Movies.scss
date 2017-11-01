@@ -29,4 +29,14 @@
     position: relative;
     margin: 20px 0;
   }
+
+  .c-collection__movies {
+    height: 440px;
+    overflow-y: hidden;
+    position: relative;
+
+    .c-movie__line {
+      position: absolute;
+    }
+  }
 }

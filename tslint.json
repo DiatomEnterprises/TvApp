@@ -23,6 +23,6 @@
       }
     ],
     "variable-name": [true, "ban-keywords"],
-    "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-separator", "check-type"]
+    "whitespace": [false, "check-branch", "check-decl", "check-operator", "check-separator", "check-type"]
   }
 }

@@ -12,13 +12,15 @@ export namespace Movie {
     path: string
     recent?: boolean
     popular?: boolean
+    onClick?: Function
   }
 }
 
 export class Movie extends Preact.Component<Movie.Props, {}> {
   render() {
-    const { id, recent, popular, name, path } = this.props
+    const { id, recent, popular, name, path, onClick } = this.props
     const props: Link.Props = {
+      onClick,
       map: "movies/view",
       path: `${path}/movie/${id}`,
       className: "c-movie",

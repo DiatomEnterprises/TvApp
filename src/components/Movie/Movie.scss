@@ -1,10 +1,5 @@
 .c-movie__line {
-  $margin: 12.5px;
   $padding: 20px;
-
-  & + & {
-    margin-top: $margin;
-  }
 
   .c-movie {
     width: 210px - $padding*2;
@@ -35,7 +30,7 @@
     }
 
     & + .c-movie {
-      margin-left: $margin;
+      margin-left: 12.5px;
     }
 
     .c-movie__description {

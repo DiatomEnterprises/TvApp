@@ -5,7 +5,7 @@ import * as classNames from "classnames"
 
 import collections from "./data"
 import { Link } from "#components"
-import { Route } from "#utils"
+import { Route, Slider } from "#utils"
 import { TitleActions, UtilsActions } from "#redux/actions"
 
 import "./Collections.scss"
@@ -19,15 +19,6 @@ namespace Collections {
     id: number
     name: string
     length: number
-  }
-}
-
-const sliderStyle = (index: number, current: number, direction: "X" | "Y" = "X", size: number = 500) => {
-  const modifier = current > 0 ? current - 1 : current
-  if (index < modifier && current > 1) {
-    return { opacity: 0 }
-  } else {
-    return { transform: `translate${direction}(${(index - modifier) * size}px)` }
   }
 }
 
@@ -62,7 +53,7 @@ class CollectionsComponent extends Preact.Component<Collections.Props, Collectio
   }
 
   renderItem = (item: Collections.Item, index: number) => {
-    const style = sliderStyle(index, this.state.current || 0)
+    const style = Slider.collections(index, this.state.current || 0)
     const props: Link.Props = {
       style,
       map: "collections",
