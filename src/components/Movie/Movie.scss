@@ -12,9 +12,9 @@
     border-radius: 3px;
 
     &.c-focused {
-      $translate: 5px;
-      top: -$translate;
-      right: -$translate;
+      $translate: 3px;
+      top: -$translate*2;
+      right: -$translate*2;
 
       &::after {
         content: "";

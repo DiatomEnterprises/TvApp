@@ -37,6 +37,9 @@
 
     .c-movie__line {
       position: absolute;
+      @include animations {
+        transition: transform 0.3s;
+      }
     }
   }
 }
