@@ -31,9 +31,10 @@ export const getState = (collectionId: number) => {
 
   const batches = []
   const { movies, ...collection } = item
-  const titles = movies.length
-  while (movies.length) {
-    batches.push(movies.splice(0, MOVIES_PER_LINE))
+  const newArray = [...movies]
+  const titles = newArray.length
+  while (newArray.length) {
+    batches.push(newArray.splice(0, MOVIES_PER_LINE))
   }
   return { collection, batches, titles }
 }

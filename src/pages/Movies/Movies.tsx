@@ -1,4 +1,5 @@
 import Preact from "#preact"
+import { getCurrentUrl } from "preact-router"
 import { connect } from "preact-redux"
 
 import { getState } from "./data"
@@ -16,19 +17,13 @@ namespace Movies {
   }
 
   export interface State {
-    collection: Collection
+    collection?: Collection
     batches: Movie.Props[][]
     titles: number
     name: string
     currentBatch: number
+    base: string
   }
-}
-
-const constants = {} as any
-const initConstants = () => {
-  constants.hash = window.location.hash.slice(1)
-  const match = constants.hash.match(/\/movies\/(\d+)/)
-  constants.base = match && match[0]
 }
 
 const findInBatches = (id: number, batches: Movie.Props[][]): number => {
@@ -43,39 +38,42 @@ const findInBatches = (id: number, batches: Movie.Props[][]): number => {
 }
 
 class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.State> {
-  constructor() {
-    super()
-    initConstants()
+  componentDidMount() {
+    const { dispatch } = this.props
+    const url = getCurrentUrl()
+    const collection = getCollection(url)
 
-    const collection = getCollection(constants.base)
+    console.warn(url, collection)
     if (collection) {
+      const match = url.match(/\/movies\/(\d+)/)
+      const base = match && match[0]
+
+      dispatch(TitleActions.change(collection.name, "Collections"))
+      dispatch(UtilsActions.focus(Route.routeToKeyboard(url)))
+      dispatch(UtilsActions.back(`${base}/back`, "back.movies"))
+
       const state = getState(collection.id) as Movies.State
-      this.state = { ...state, name: collection.name, currentBatch: 0 }
+      this.setState({ ...state, name: collection.name, currentBatch: this.currentBatch(url), base } as Movies.State)
     }
   }
 
-  componentDidMount() {
-    initConstants()
-
-    const { dispatch } = this.props
-    this.onClick(constants.hash)
-    dispatch(TitleActions.change(this.state.name, "Collections"))
-    dispatch(UtilsActions.focus(Route.routeToKeyboard(constants.hash)))
-    dispatch(UtilsActions.back(`${constants.base}/back`, "back.movies"))
+  currentBatch(path: string) {
+    const match = path.match(/movie\/(\d+)/)
+    if (match) {
+      const index = parseInt(match[1], 10)
+      return findInBatches(index, this.state.batches)
+    }
+    return 0
   }
 
   onClick = (next: string) => {
-    const match = next.match(/movie\/(\d+)/)
-    if (match) {
-      const index = parseInt(match[1], 10)
-      this.setState({ currentBatch: findInBatches(index, this.state.batches) })
-    }
+    this.setState({ currentBatch: this.currentBatch(next) })
   }
 
   renderBuyLink() {
     const props: Link.Props = {
       map: "movies/nav",
-      path: `${constants.base}/buy`,
+      path: `${this.state.base}/buy`,
       className: "c-button float__left",
       activeClassName: "c-focused"
     }
@@ -85,7 +83,7 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
   renderSortLink() {
     const props: Link.Props = {
       map: "movies/nav",
-      path: `${constants.base}/sort`,
+      path: `${this.state.base}/sort`,
       className: "c-button float__right",
       activeClassName: "c-focused"
     }
@@ -93,16 +91,18 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
   }
 
   renderBatch(movies: Movie.Props[], index: number) {
-    const style = Slider.movies(index, this.state.currentBatch)
+    const { currentBatch, base } = this.state
+    const style = Slider.movies(index, currentBatch)
     return (
       <div style={style} className="c-movie__line">
-        {movies.map(movie => <Movie {...movie} onClick={this.onClick} path={constants.base} />)}
+        {movies.map(movie => <Movie {...movie} onClick={this.onClick} path={base} />)}
       </div>
     )
   }
 
   render() {
     const { collection, batches, titles } = this.state
+    if (!collection) return null
 
     return (
       <div className="c-collection">

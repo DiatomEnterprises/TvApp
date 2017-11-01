@@ -1,8 +1,8 @@
 import Preact from "#preact"
 import { connect } from "preact-redux"
 import * as classNames from "classnames"
-import { route } from "preact-router"
 import { Match } from "preact-router/match"
+import { route, getCurrentUrl } from "preact-router"
 
 import { UtilsActions } from "#redux/actions"
 
@@ -30,10 +30,10 @@ class LinkComponent extends Preact.Component<Link.WithRedux, {}> {
 
   onClick = (event: MouseEvent) => {
     const { path, onClick, map, dispatch, focused } = this.props
-    const hash = window.location.hash.slice(1)
+    const hash = getCurrentUrl()
 
     if (hash !== path) {
-      route(path)
+      route(path, true)
     }
     if (focused !== map) {
       dispatch(UtilsActions.focus(map))

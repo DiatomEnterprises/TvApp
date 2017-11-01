@@ -1,7 +1,7 @@
 import Preact from "#preact"
-import { route } from "preact-router"
-import { connect } from "preact-redux"
 import * as classNames from "classnames"
+import { connect } from "preact-redux"
+import { route, getCurrentUrl } from "preact-router"
 
 import { Link } from "#components"
 import { TitleActions } from "#redux/actions"
@@ -19,7 +19,7 @@ namespace Navigation {
 
 class NavigationComponent extends Preact.Component<Navigation.Props, {}> {
   componentDidMount() {
-    route(getPath(window.location.hash.substr(1)), true)
+    route(getPath(getCurrentUrl()), true)
     this.props.dispatch(TitleActions.change("Catalogue", ""))
   }
 

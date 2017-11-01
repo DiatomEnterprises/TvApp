@@ -1,6 +1,9 @@
+import { getCurrentUrl } from "preact-router"
+
 const backUrl = (prev: string, next: string) => {
-  const hash = window.location.hash.slice(1)
-  const path = hash.replace("/back", "").replace(prev, next)
+  const path = getCurrentUrl()
+    .replace("/back", "")
+    .replace(prev, next)
   return `url/${path}`
 }
 

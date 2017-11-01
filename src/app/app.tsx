@@ -1,5 +1,6 @@
 import Preact from "#preact"
 import * as classNames from "classnames"
+import { getCurrentUrl } from "preact-router"
 import { Provider, connect } from "preact-redux"
 
 import { Store } from "#redux/store"
@@ -12,7 +13,7 @@ import "./../styles/app.scss"
 
 class AppComponent extends Preact.Component<MyRedux.Dispatch.Props & MyRedux.Reducers.Utils, {}> {
   componentDidMount() {
-    const map = Route.routeToKeyboard(window.location.hash.slice(1))
+    const map = Route.routeToKeyboard(getCurrentUrl())
     if (map === "navigation") {
       this.props.dispatch(UtilsActions.focus(map))
     }

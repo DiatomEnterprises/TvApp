@@ -1,6 +1,6 @@
 import Preact from "#preact"
 import { connect } from "preact-redux"
-import { route } from "preact-router"
+import { route, getCurrentUrl } from "preact-router"
 import * as classNames from "classnames"
 
 import collections from "./data"
@@ -25,7 +25,7 @@ namespace Collections {
 class CollectionsComponent extends Preact.Component<Collections.Props, Collections.State> {
   constructor() {
     super()
-    const [, parsed] = window.location.hash.split("#/collections/")
+    const [, parsed] = getCurrentUrl().split("/collections/")
     const id = parseInt(parsed, 10)
     const index = collections.findIndex(item => item.id === id)
     this.state = { current: index === -1 ? null : index }
@@ -33,7 +33,7 @@ class CollectionsComponent extends Preact.Component<Collections.Props, Collectio
 
   componentDidMount() {
     const { dispatch } = this.props
-    const map = Route.routeToKeyboard(window.location.hash.slice(1))
+    const map = Route.routeToKeyboard(getCurrentUrl())
 
     dispatch(TitleActions.change("Catalogue", ""))
     dispatch(UtilsActions.focus(map))
