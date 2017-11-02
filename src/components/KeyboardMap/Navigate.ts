@@ -26,7 +26,7 @@ export const Navigate = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Co
 
     case action.includes("@"): {
       const [map, child] = action.split("@")
-      return handleLinks(MapObject[map], child)
+      return handleLinks(MapObject[map], parseInt(child, 10))
     }
 
     default:
@@ -71,14 +71,15 @@ const handleActions = (
   }
 }
 
-const handleLinks = (controls: KeyboardMap.Controls, child: number | string) => {
+const handleLinks = (controls: KeyboardMap.Controls, child: number) => {
   handleMaps(controls, child)
 }
 
-const handleMaps = (controls: KeyboardMap.Controls, child: number | string = 0) => {
+const handleMaps = (controls: KeyboardMap.Controls, child: number = 0) => {
   const element = document.querySelector(`${controls.selector}`)
   if (element) {
-    Events.click(element.children[child])
+    const pos = Math.min(element.children.length - 1, child)
+    Events.click(element.children[pos])
   } else {
     throwElementError(controls.selector)
   }
@@ -88,7 +89,7 @@ const handleComplex = (element: Element, map: KeyboardMap.MapKeys, control: keyo
   const index = _.childIndex(element)
   const complex = MapComplex[map][control][index] as KeyboardMap.Links
   const [m, child] = complex.split("@")
-  return handleLinks(MapObject[m], child)
+  return handleLinks(MapObject[m], parseInt(child, 10))
 }
 
 const prevNext = (dir: Direction, el: Element, controls: KeyboardMap.Controls, map: KeyboardMap.MapKeys) => {

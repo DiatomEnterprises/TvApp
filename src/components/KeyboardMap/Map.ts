@@ -7,10 +7,10 @@ const backUrl = (prev: string, next: string) => {
   return `url/${path}`
 }
 
+// NOTE: Missing TypeScript support.
 export const MapComplex = {
   "movies/view": {
     upFirst: {
-      selector: "",
       0: "movies/nav@0",
       1: "movies/nav@0",
       2: "movies/nav@0",
@@ -20,7 +20,6 @@ export const MapComplex = {
   },
   "movies/nav": {
     down: {
-      selector: "",
       0: "movies/view@0",
       1: "movies/view@4"
     }
@@ -42,17 +41,17 @@ export const MapObject: KeyboardMap.Map = {
   },
   navigation: {
     selector: ".c-nav",
+    enter: "collections",
     up: ":prev",
     down: ":next",
-    right: "collections",
-    enter: "collections"
+    right: "collections"
   },
   collections: {
     selector: ".c-collections",
+    enter: ":current",
     left: ":prev",
     leftFirst: "back.collections",
-    right: ":next",
-    enter: ":current"
+    right: ":next"
   },
   "movies/view": {
     selector: ".c-movie__line",
@@ -65,6 +64,7 @@ export const MapObject: KeyboardMap.Map = {
   },
   "movies/nav": {
     selector: ".c-collection__nav",
+    enter: ":current",
     left: ":prev",
     leftFirst: "back.movies",
     right: ":next",

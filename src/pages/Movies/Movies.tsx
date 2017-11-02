@@ -1,6 +1,6 @@
 import Preact from "#preact"
 import { connect } from "preact-redux"
-import { getCurrentUrl } from "preact-router"
+import { getCurrentUrl, route } from "preact-router"
 
 import { getState } from "./data"
 import { getCollection } from "./../Collections/data"
@@ -22,6 +22,7 @@ namespace Movies {
     titles: number
     name: string
     currentBatch: number
+    bought: boolean
     base: string
   }
 }
@@ -43,7 +44,7 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
 
     const state = getState(id) as Movies.State
     const currentBatch = this.currentBatch(url, state.batches)
-    this.setState({ ...state, currentBatch, name, base } as Movies.State)
+    this.setState({ ...state, currentBatch, name, base, bought: false } as Movies.State)
   }
 
   currentBatch(path: string, batches = this.state.batches) {
@@ -57,11 +58,24 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
     this.setState({ currentBatch: this.currentBatch(next) })
   }
 
+  onBuy = (next: string, prev: string) => {
+    const regex = /\/buy/
+    if (prev.match(regex)) {
+      const url = prev.replace(regex, "/movie/1")
+      route(url)
+      this.setState({ bought: true })
+      this.props.dispatch(UtilsActions.focus(Route.routeToKeyboard(url)))
+    }
+  }
+
   renderBuyLink() {
+    if (this.state.bought) return
+
     const props: Link.Props = {
       map: "movies/nav",
       path: `${this.state.base}/buy`,
-      className: "c-button float__left"
+      className: "c-button float__left",
+      onClick: this.onBuy
     }
     return <Link {...props}>Buy All XXX</Link>
   }
