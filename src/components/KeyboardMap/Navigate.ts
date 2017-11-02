@@ -1,9 +1,8 @@
 import { route } from "preact-router"
-import { _, Events } from "#utils"
+import { _, Events, C } from "#utils"
 
 import { MapObject, MapComplex } from "./Map"
 
-const FOCUSED_CLASS = ".c-focused"
 type Direction = "previous" | "next"
 
 export const Navigate = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Controls) => {
@@ -43,7 +42,7 @@ const handleActions = (
   map: KeyboardMap.MapKeys,
   control: keyof KeyboardMap.Controls
 ) => {
-  const element = document.querySelector(`${controls.selector} ${FOCUSED_CLASS}`)
+  const element = document.querySelector(`${controls.selector} .${C.FOCUSED_CLASS}`)
   if (!element || !element.parentElement) {
     return throwElementError(controls.selector)
   }

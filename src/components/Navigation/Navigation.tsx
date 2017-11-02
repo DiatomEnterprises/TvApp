@@ -24,7 +24,7 @@ class NavigationComponent extends Preact.Component<Navigation.Props, {}> {
   }
 
   renderLink = ({ path, name }: { path: string; name: string }) => {
-    const props = { path, map: "navigation", className: "c-nav__item", activeClassName: "c-focused" }
+    const props = { path, map: "navigation", className: "c-nav__item" }
     return <Link {...props}>{name}</Link>
   }
 

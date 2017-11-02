@@ -23,8 +23,7 @@ export class BackButtonComponent extends Preact.Component<MyRedux.Reducers.Utils
       map,
       path,
       onClick: this.onClick,
-      className: "c-back_button center__vertical float__left",
-      activeClassName: "c-focused"
+      className: "c-back_button center__vertical float__left"
     }
 
     return (

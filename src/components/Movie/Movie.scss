@@ -1,5 +1,9 @@
 .c-movie__line {
   $padding: 20px;
+  position: absolute;
+  @include animations {
+    transition: transform 0.3s;
+  }
 
   .c-movie {
     width: 210px - $padding*2;

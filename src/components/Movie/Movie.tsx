@@ -23,8 +23,7 @@ export class Movie extends Preact.Component<Movie.Props, {}> {
       onClick,
       map: "movies/view",
       path: `${path}/movie/${id}`,
-      className: "c-movie",
-      activeClassName: "c-focused"
+      className: "c-movie"
     }
 
     return (

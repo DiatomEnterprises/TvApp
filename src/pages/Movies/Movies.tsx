@@ -1,6 +1,6 @@
 import Preact from "#preact"
-import { getCurrentUrl } from "preact-router"
 import { connect } from "preact-redux"
+import { getCurrentUrl } from "preact-router"
 
 import { getState } from "./data"
 import { getCollection } from "./../Collections/data"
@@ -61,8 +61,7 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
     const props: Link.Props = {
       map: "movies/nav",
       path: `${this.state.base}/buy`,
-      className: "c-button float__left",
-      activeClassName: "c-focused"
+      className: "c-button float__left"
     }
     return <Link {...props}>Buy All XXX</Link>
   }
@@ -71,8 +70,7 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
     const props: Link.Props = {
       map: "movies/nav",
       path: `${this.state.base}/sort`,
-      className: "c-button float__right",
-      activeClassName: "c-focused"
+      className: "c-button float__right"
     }
     return <Link {...props}>Sort</Link>
   }

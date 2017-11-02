@@ -4,13 +4,13 @@ import * as classNames from "classnames"
 import { Match } from "preact-router/match"
 import { route, getCurrentUrl } from "preact-router"
 
+import { C } from "#utils"
 import { UtilsActions } from "#redux/actions"
 
 export namespace Link {
   export interface Props {
     path: string
     className: string
-    activeClassName: string
     map: KeyboardMap.MapKeys
     children?: JSX.Element[]
     onClick?: Function
@@ -44,11 +44,11 @@ class LinkComponent extends Preact.Component<Link.WithRedux, {}> {
   }
 
   render() {
-    const { className, activeClassName, path, children, style } = this.props
+    const { className, path, children, style } = this.props
     return (
       <Match path={path}>
         {({ matches }: { matches: boolean }) => (
-          <div style={style} onClick={this.onClick} className={classNames(className, { [activeClassName]: matches })}>
+          <div style={style} onClick={this.onClick} className={classNames(className, { [C.FOCUSED_CLASS]: matches })}>
             {children}
           </div>
         )}

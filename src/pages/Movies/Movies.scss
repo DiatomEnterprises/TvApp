@@ -26,20 +26,14 @@
 
   .c-collection__nav {
     height: 35px;
-    position: relative;
     margin: 20px 0;
+    position: relative;
   }
 
   .c-collection__movies {
+    padding-top: 10px;
     height: 440px;
     overflow: hidden;
     position: relative;
-
-    .c-movie__line {
-      position: absolute;
-      @include animations {
-        transition: transform 0.3s;
-      }
-    }
   }
 }

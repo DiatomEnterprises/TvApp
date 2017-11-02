@@ -59,7 +59,6 @@ class CollectionsComponent extends Preact.Component<Collections.Props, Collectio
       map: "collections",
       path: `/collections/${item.id}`,
       className: "c-collections__item",
-      activeClassName: "c-focused",
       onReset: this.onReset,
       onClick: this.onClick.bind(this, index)
     }
