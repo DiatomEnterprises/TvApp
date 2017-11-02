@@ -1,8 +1,10 @@
 import { route } from "preact-router"
-import { Events } from "#utils"
+import { _, Events } from "#utils"
 
 import { MapObject, MapComplex } from "./Map"
+
 const FOCUSED_CLASS = ".c-focused"
+type Direction = "previous" | "next"
 
 export const Navigate = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Controls) => {
   const controls = MapObject[map]
@@ -20,8 +22,7 @@ export const Navigate = (map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Co
     }
 
     case action.includes(":"): {
-      const data = { map, control }
-      return handleActions(controls, action as KeyboardMap.Actions, data)
+      return handleActions(controls, action as KeyboardMap.Actions, map, control)
     }
 
     case action.includes("@"): {
@@ -39,10 +40,11 @@ const handleUrl = (url: string) => route(url, true)
 const handleActions = (
   controls: KeyboardMap.Controls,
   action: KeyboardMap.Actions,
-  { map, control }: { map: KeyboardMap.MapKeys; control: keyof KeyboardMap.Controls }
+  map: KeyboardMap.MapKeys,
+  control: keyof KeyboardMap.Controls
 ) => {
   const element = document.querySelector(`${controls.selector} ${FOCUSED_CLASS}`)
-  if (!element) {
+  if (!element || !element.parentElement) {
     return throwElementError(controls.selector)
   }
 
@@ -51,29 +53,20 @@ const handleActions = (
       return Events.click(element)
     }
     case ":prev": {
-      const sibling = element.previousElementSibling
-      if (sibling) {
-        Events.click(sibling)
-      } else if (controls.first) {
-        handleMaps(MapObject[controls.first])
-      }
-      return
+      return prevNext("previous", element, controls, map)
     }
     case ":next": {
-      const sibling = element.nextElementSibling
-      if (sibling) {
-        Events.click(sibling)
-      } else if (controls.last) {
-        handleMaps(MapObject[controls.last])
-      }
-      return
+      return prevNext("next", element, controls, map)
     }
-    case ":complex":
-      const parent = element.parentElement as HTMLElement
-      const index = Array.from(parent.children).indexOf(element)
-      const complex = MapComplex[map][control][index] as KeyboardMap.Links
-      const [m, child] = complex.split("@")
-      return handleLinks(MapObject[m], child)
+    case ":prev:parent": {
+      return prevNextParent("previous", element, controls, map)
+    }
+    case ":next:parent": {
+      return prevNextParent("next", element, controls, map)
+    }
+    case ":complex": {
+      return handleComplex(element, map, control)
+    }
     default:
       throw new Error(`Unhandled Action ${action}`)
   }
@@ -89,6 +82,45 @@ const handleMaps = (controls: KeyboardMap.Controls, child: number | string = 0) 
     Events.click(element.children[child])
   } else {
     throwElementError(controls.selector)
+  }
+}
+
+const handleComplex = (element: Element, map: KeyboardMap.MapKeys, control: keyof KeyboardMap.Controls) => {
+  const index = _.childIndex(element)
+  const complex = MapComplex[map][control][index] as KeyboardMap.Links
+  const [m, child] = complex.split("@")
+  return handleLinks(MapObject[m], child)
+}
+
+const prevNext = (dir: Direction, el: Element, controls: KeyboardMap.Controls, map: KeyboardMap.MapKeys) => {
+  const sibling = el[`${dir}ElementSibling`]
+  const control = dir === "next" ? "rightLast" : "leftFirst"
+  const action = controls[control]
+
+  if (sibling) {
+    Events.click(sibling)
+  } else if (action === ":complex") {
+    handleComplex(el, map, control)
+  } else if (action) {
+    handleMaps(MapObject[action])
+  }
+}
+
+const prevNextParent = (dir: Direction, el: Element, controls: KeyboardMap.Controls, map: KeyboardMap.MapKeys) => {
+  const parent = el.parentElement as HTMLElement
+  const sibling = parent[`${dir}ElementSibling`]
+  const control = dir === "next" ? "downLast" : "upFirst"
+  const action = controls[control]
+
+  if (sibling) {
+    const index = _.childIndex(el)
+    const length = sibling.children.length - 1
+    const pos = Math.min(index, length)
+    Events.click(sibling.children[pos])
+  } else if (action === ":complex") {
+    handleComplex(el, map, control)
+  } else if (action) {
+    handleMaps(MapObject[action])
   }
 }
 

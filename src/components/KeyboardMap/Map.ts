@@ -9,7 +9,7 @@ const backUrl = (prev: string, next: string) => {
 
 export const MapComplex = {
   "movies/view": {
-    up: {
+    upFirst: {
       selector: "",
       0: "movies/nav@0",
       1: "movies/nav@0",
@@ -49,22 +49,24 @@ export const MapObject: KeyboardMap.Map = {
   },
   collections: {
     selector: ".c-collections",
-    first: "back.collections",
     left: ":prev",
+    leftFirst: "back.collections",
     right: ":next",
     enter: ":current"
   },
   "movies/view": {
     selector: ".c-movie__line",
-    first: "back.movies",
-    up: ":complex",
+    up: ":prev:parent",
+    upFirst: ":complex",
     left: ":prev",
-    right: ":next"
+    leftFirst: "back.movies",
+    right: ":next",
+    down: ":next:parent"
   },
   "movies/nav": {
     selector: ".c-collection__nav",
-    first: "back.movies",
     left: ":prev",
+    leftFirst: "back.movies",
     right: ":next",
     down: ":complex"
   }
