@@ -1,48 +1,55 @@
 .c-movie__line {
-  $padding: 20px;
   position: absolute;
   @include animations {
     transition: transform 0.3s;
   }
 
   .c-movie {
-    width: 210px - $padding*2;
+    $radius: 3px;
+    $padding: 20px;
+    $translate: 5px;
+
+    width: 210px;
     height: 300px;
-    background-color: #242c33;
     display: inline-block;
-    position: relative;
-    padding: 0 $padding;
-    vertical-align: bottom;
-    border-radius: 3px;
+    border-radius: $radius;
+    background-color: #242c33;
 
-    &.c-focused {
-      $translate: 3px;
-      top: -$translate*2;
-      right: -$translate*2;
+    & + .c-movie {
+      margin-left: 10px;
+    }
 
-      &::after {
-        content: "";
-        position: absolute;
-        border-radius: 3px;
-        width: 100%;
-        height: 100%;
-        bottom: -$translate*2;
-        left: -$translate*2;
-        background-color: $color-focused;
-        z-index: -1;
+    &::after {
+      content: "";
+      height: 100%;
+      z-index: -1;
+      display: block;
+      position: relative;
+      border-radius: $radius;
+
+      @include animations {
+        transition: transform 0.5s;
       }
     }
 
-    & + .c-movie {
-      margin-left: 12.5px;
+    &.c-focused {
+      .c-movie__description .c-movie__name {
+        display: block;
+      }
+      &::after {
+        background-color: $color-focused;
+        transform: translate($translate, -$translate);
+      }
     }
 
     .c-movie__description {
       bottom: $padding;
       position: absolute;
+      padding-left: $padding;
 
       .c-movie__name {
         color: white;
+        display: none;
       }
     }
   }
