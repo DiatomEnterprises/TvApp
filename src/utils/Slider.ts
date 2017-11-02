@@ -11,7 +11,7 @@ const movies = (index: number, current: number) => {
   const modifier = current > 0 ? 70 : 0
 
   if (current > index + 1) {
-    return { display: "none" }
+    return { transform: `translateY(${(index - 1) * 312.5 + modifier}px)` }
   } else {
     return { transform: `translateY(${(index - current) * 312.5 + modifier}px)` }
   }
