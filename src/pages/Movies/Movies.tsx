@@ -2,7 +2,7 @@ import Preact from "#preact"
 import { connect } from "preact-redux"
 import { getCurrentUrl, route } from "preact-router"
 
-import { getState } from "./data"
+import { getState, batchMovies } from "./data"
 import { getCollection } from "./../Collections/data"
 import { _, Route, Slider } from "#utils"
 import { Movie, Link, BuyButton, SortButton, Dropdown } from "#components"
@@ -18,15 +18,18 @@ namespace Movies {
 
   export interface State {
     collection?: Collection
+    movies: Movie.Props[]
     batches: Movie.Props[][]
     titles: number
     name: string
     currentBatch: number
     base: string
   }
+
+  export interface Props extends MyRedux.Dispatch.Props, MyRedux.Reducers.Utils {}
 }
 
-class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.State> {
+class MoviesComponent extends Preact.Component<Movies.Props, Movies.State> {
   componentDidMount() {
     const url = getCurrentUrl()
     const collection = getCollection(url)
@@ -44,6 +47,15 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
     const state = getState(id) as Movies.State
     const currentBatch = this.currentBatch(url, state.batches)
     this.setState({ ...state, currentBatch, name, base } as Movies.State)
+  }
+
+  componentWillReceiveProps(next: Movies.Props) {
+    console.error(next.sort, this.props.sort)
+    if (next.sort && next.sort !== this.props.sort) {
+      const sortBy = _.sortBy[next.sort.by]
+      const batches = batchMovies(sortBy(this.state.movies))
+      this.setState({ batches })
+    }
   }
 
   currentBatch(path: string, batches = this.state.batches) {
@@ -91,4 +103,5 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
   }
 }
 
-export const Movies = connect()(MoviesComponent as any)
+const mapStateToProps = ({ utils }: MyRedux.State) => ({ sort: utils.sort })
+export const Movies = connect(mapStateToProps)(MoviesComponent as any)

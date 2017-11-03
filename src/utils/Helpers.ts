@@ -14,4 +14,10 @@ const findInBatches = (id: number, batches: any[][]): number => {
   return 0
 }
 
-export const _ = { childIndex, findInBatches }
+const sortBy = {
+  name: (array: any[]) => array.sort((a, b) => a.name.localeCompare(b.name)),
+  rating: (array: any[]) => array.sort((a, b) => b.rating - a.rating),
+  date: (array: any[]) => array.sort((a, b) => b.date - a.date)
+}
+
+export const _ = { childIndex, findInBatches, sortBy }
