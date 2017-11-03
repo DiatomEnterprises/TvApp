@@ -69,5 +69,13 @@ export const MapObject: KeyboardMap.Map = {
     leftFirst: "back.movies",
     right: ":next",
     down: ":complex"
+  },
+  "movies/dropdown": {
+    selector: ".c-dropdown",
+    enter: ":current",
+    up: ":prev",
+    leftFirst: "movies/nav@1",
+    down: ":next",
+    rightLast: "movies/view@4"
   }
 }

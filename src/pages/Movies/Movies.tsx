@@ -5,7 +5,7 @@ import { getCurrentUrl, route } from "preact-router"
 import { getState } from "./data"
 import { getCollection } from "./../Collections/data"
 import { _, Route, Slider } from "#utils"
-import { Movie, Link } from "#components"
+import { Movie, Link, BuyButton, SortButton, Dropdown } from "#components"
 import { TitleActions, UtilsActions } from "#redux/actions"
 
 import "./Movies.scss"
@@ -22,7 +22,6 @@ namespace Movies {
     titles: number
     name: string
     currentBatch: number
-    bought: boolean
     base: string
   }
 }
@@ -44,7 +43,7 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
 
     const state = getState(id) as Movies.State
     const currentBatch = this.currentBatch(url, state.batches)
-    this.setState({ ...state, currentBatch, name, base, bought: false } as Movies.State)
+    this.setState({ ...state, currentBatch, name, base } as Movies.State)
   }
 
   currentBatch(path: string, batches = this.state.batches) {
@@ -56,37 +55,6 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
 
   onClick = (next: string) => {
     this.setState({ currentBatch: this.currentBatch(next) })
-  }
-
-  onBuy = (next: string, prev: string) => {
-    const regex = /\/buy/
-    if (prev.match(regex)) {
-      const url = prev.replace(regex, "/movie/1")
-      route(url)
-      this.setState({ bought: true })
-      this.props.dispatch(UtilsActions.focus(Route.routeToKeyboard(url)))
-    }
-  }
-
-  renderBuyLink() {
-    if (this.state.bought) return
-
-    const props: Link.Props = {
-      map: "movies/nav",
-      path: `${this.state.base}/buy`,
-      className: "c-button float__left",
-      onClick: this.onBuy
-    }
-    return <Link {...props}>Buy All XXX</Link>
-  }
-
-  renderSortLink() {
-    const props: Link.Props = {
-      map: "movies/nav",
-      path: `${this.state.base}/sort`,
-      className: "c-button float__right"
-    }
-    return <Link {...props}>Sort</Link>
   }
 
   renderBatch(movies: Movie.Props[], index: number) {
@@ -101,8 +69,10 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
   }
 
   render() {
-    const { collection, batches, titles } = this.state
+    const { collection, batches, titles, base } = this.state
     if (!collection) return null
+    const button = { map: "movies/nav", base }
+    const dropdown = { map: "movies/dropdown", base }
 
     return (
       <div className="c-collection">
@@ -110,8 +80,9 @@ class MoviesComponent extends Preact.Component<MyRedux.Dispatch.Props, Movies.St
         <div className="c-collection__description">{collection.description}</div>
 
         <div className="c-collection__nav">
-          {this.renderBuyLink()}
-          {this.renderSortLink()}
+          <BuyButton {...button} />
+          <SortButton {...button} />
+          <Dropdown {...dropdown} />
         </div>
 
         <div className="c-collection__movies">{batches.map((movies, index) => this.renderBatch(movies, index))}</div>

@@ -1,6 +1,6 @@
 declare namespace KeyboardMap {
   export type Url = "url/back"
-  export type Links = "navigation@4" | "movies/view@0" | "movies/nav@0" | "movies/nav@1"
+  export type Links = "navigation@4" | "movies/view@0" | "movies/view@4" | "movies/nav@0" | "movies/nav@1"
   export type Actions = ":prev" | ":prev:parent" | ":next" | ":next:parent" | ":current" | ":complex"
   export type MapKeys = keyof Map
 
@@ -13,6 +13,7 @@ declare namespace KeyboardMap {
     collections: Controls
     "movies/view": Controls
     "movies/nav": Controls
+    "movies/dropdown": Controls
     "back.collections": Controls
     "back.movies": Controls
   }
@@ -32,6 +33,7 @@ declare namespace KeyboardMap {
 }
 
 declare namespace MyRedux {
+  export type SortBy = "name" | "rating" | "date"
   export namespace Dispatch {
     export interface Props {
       dispatch: (data: DispatchParams) => void
@@ -57,6 +59,10 @@ declare namespace MyRedux {
       back?: {
         map: KeyboardMap.MapKeys
         path: string
+      }
+      sort?: {
+        by: SortBy
+        name: string
       }
       focused?: keyof KeyboardMap.Map
     }

@@ -1,0 +1,23 @@
+.c-dropdown {
+  z-index: 1;
+  top: 30px;
+  right: 20px;
+  position: absolute;
+  display: inline-block;
+  border-radius: 3px;
+  overflow: hidden;
+
+  .c-dropdown__item {
+    width: 160px;
+    padding: 10px 0;
+    background-color: darken(#242c33, 10);
+
+    &.c-focused {
+      color: black;
+      background-color: $color-focused;
+    }
+    & + .c-dropdown__item {
+      border-top: 1px solid black;
+    }
+  }
+}

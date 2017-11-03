@@ -11,6 +11,10 @@ const routeToKeyboard = (route: string): KeyboardMap.MapKeys => {
     case !!route.match(/movies\/(\d+)\/buy$/):
     case !!route.match(/movies\/(\d+)\/sort$/):
       return "movies/nav"
+    case !!route.match(/movies\/(\d+)\/name$/):
+    case !!route.match(/movies\/(\d+)\/rating$/):
+    case !!route.match(/movies\/(\d+)\/date$/):
+      return "movies/dropdown"
     default:
       return "navigation"
   }

@@ -4,7 +4,7 @@ import { connect } from "preact-redux"
 import { Link } from "#components"
 import { Events } from "#utils"
 
-import "./BackButton.scss"
+import "./Back.scss"
 
 export class BackButtonComponent extends Preact.Component<MyRedux.Reducers.Utils, {}> {
   onClick = (next: string, prev: string) => {

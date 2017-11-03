@@ -76,7 +76,7 @@ const handleLinks = (controls: KeyboardMap.Controls, child: number) => {
 }
 
 const handleMaps = (controls: KeyboardMap.Controls, child: number = 0) => {
-  const element = document.querySelector(`${controls.selector}`)
+  const element = document.querySelector(controls.selector)
   if (element) {
     const pos = Math.min(element.children.length - 1, child)
     Events.click(element.children[pos])
@@ -101,6 +101,9 @@ const prevNext = (dir: Direction, el: Element, controls: KeyboardMap.Controls, m
     Events.click(sibling)
   } else if (action === ":complex") {
     handleComplex(el, map, control)
+  } else if (action && action.includes("@")) {
+    const [map, child] = action.split("@")
+    handleLinks(MapObject[map], parseInt(child, 10))
   } else if (action) {
     handleMaps(MapObject[action])
   }
