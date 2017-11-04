@@ -7,7 +7,7 @@ import { Store } from "#redux/store"
 import { UtilsActions } from "#redux/actions"
 import { BackButton, KeyboardMap, Navigation, Title } from "#components"
 import { Routes } from "./routes"
-import { _, Route } from "#utils"
+import { _, Route, C } from "#utils"
 
 import "./../styles/app.scss"
 
@@ -15,7 +15,9 @@ class AppComponent extends Preact.Component<MyRedux.Dispatch.Props & MyRedux.Red
   componentDidMount() {
     const map = Route.routeToKeyboard(getCurrentUrl())
     if (map === "navigation") {
-      this.props.dispatch(UtilsActions.focus(map))
+      const { dispatch } = this.props
+      dispatch(UtilsActions.focus(map))
+      dispatch(UtilsActions.background(C.DEFAULT_BACKGROUND))
     }
   }
 

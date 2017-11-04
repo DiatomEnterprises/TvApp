@@ -1,6 +1,6 @@
 .c-container__wrapper {
   background-size: cover;
-  background-color: $color-background;
+  background-color: darken($color-bg-grey, 10%);
   overflow: hidden;
   width: map-get($main-sizes, max-width);
   height: map-get($main-sizes, max-height);
