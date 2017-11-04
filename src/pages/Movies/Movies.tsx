@@ -54,7 +54,7 @@ class MoviesComponent extends Preact.Component<Movies.Props, Movies.State> {
     console.error(next.sort, this.props.sort)
     if (next.sort && next.sort !== this.props.sort) {
       const sortBy = _.sortBy[next.sort.by]
-      const batches = batchMovies(sortBy(this.state.movies))
+      const batches = batchMovies(this.state.movies.sort(sortBy))
       this.setState({ batches })
     }
   }

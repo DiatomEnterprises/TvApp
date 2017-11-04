@@ -17,9 +17,9 @@ const findInBatches = (id: number, batches: any[][]): number => {
 }
 
 const sortBy = {
-  name: (array: any[]) => array.sort((a, b) => a.name.localeCompare(b.name)),
-  rating: (array: any[]) => array.sort((a, b) => b.rating - a.rating),
-  date: (array: any[]) => array.sort((a, b) => b.date - a.date)
+  name: (a: any, b: any) => a.name.localeCompare(b.name),
+  rating: (a: any, b: any) => b.rating - a.rating,
+  date: (a: any, b: any) => b.date - a.date
 }
 
 const background = (image: string | undefined) => {
