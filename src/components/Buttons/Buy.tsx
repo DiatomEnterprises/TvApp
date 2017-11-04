@@ -20,7 +20,7 @@ class BuyButtonComponent extends Preact.Component<BuyButton.Props & MyRedux.Disp
   onClick = (next: string, prev: string) => {
     const regex = /\/buy/
     if (prev.match(regex)) {
-      const url = prev.replace(regex, "/movie/1")
+      const url = prev.replace(regex, "/sort")
       route(url)
       this.setState({ bought: true })
       this.props.dispatch(UtilsActions.focus(Route.routeToKeyboard(url)))

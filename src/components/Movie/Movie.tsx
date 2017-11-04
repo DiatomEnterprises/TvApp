@@ -1,6 +1,7 @@
 import Preact from "#preact"
 
 import { Link } from "#components"
+import { _ } from "#utils"
 import "./Movie.scss"
 
 export namespace Movie {
@@ -8,8 +9,9 @@ export namespace Movie {
     id: number
     name: string
     rating: number
-    date: string
+    date: number
     path: string
+    image: string
     recent?: boolean
     popular?: boolean
     onClick?: Function
@@ -18,9 +20,10 @@ export namespace Movie {
 
 export class Movie extends Preact.Component<Movie.Props, {}> {
   render() {
-    const { id, recent, popular, name, path, onClick } = this.props
+    const { id, recent, popular, name, image, path, onClick } = this.props
     const props: Link.Props = {
       onClick,
+      style: _.background(image),
       map: "movies/view",
       path: `${path}/movie/${id}`,
       className: "c-movie"

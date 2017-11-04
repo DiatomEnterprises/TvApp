@@ -37,14 +37,20 @@
       }
       &::after {
         background-color: $color-focused;
-        transform: translate($translate, -$translate);
+        transform: translate(-$translate, $translate);
       }
     }
 
     .c-movie__description {
+      width: 210px;
       bottom: $padding;
       position: absolute;
-      padding-left: $padding;
+      background-color: rgba($color-bg-grey, 0.9);
+
+      .h4,
+      .c-movie__name {
+        padding: 5px $padding;
+      }
 
       .c-movie__name {
         color: $color-white;

@@ -1,7 +1,13 @@
 const ASSETS_URL = "/assets/"
 const FOCUSED_CLASS = "c-focused"
+const COLLECTION_WIDTH = 500
+const MOVIES_HEIGHT = 430
+const MOVIE_LINE_HEIGHT = 310
 
 export const C = {
   ASSETS_URL,
-  FOCUSED_CLASS
+  FOCUSED_CLASS,
+  COLLECTION_WIDTH,
+  MOVIES_HEIGHT,
+  MOVIE_LINE_HEIGHT
 }

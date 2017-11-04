@@ -45,18 +45,21 @@ class MoviesComponent extends Preact.Component<Movies.Props, Movies.State> {
     dispatch(UtilsActions.focus(Route.routeToKeyboard(url)))
     dispatch(UtilsActions.back(`${base}/back`, "back.movies"))
 
-    const state = getState(id) as Movies.State
+    const state = getState(id, this.sortFunc()) as Movies.State
     const currentBatch = this.currentBatch(url, state.batches)
     this.setState({ ...state, currentBatch, name, base } as Movies.State)
   }
 
   componentWillReceiveProps(next: Movies.Props) {
-    console.error(next.sort, this.props.sort)
     if (next.sort && next.sort !== this.props.sort) {
-      const sortBy = _.sortBy[next.sort.by]
+      const sortBy = this.sortFunc(next)
       const batches = batchMovies(this.state.movies.sort(sortBy))
       this.setState({ batches })
     }
+  }
+
+  sortFunc(props = this.props) {
+    return _.sortBy[props.sort ? props.sort.by : "date"]
   }
 
   currentBatch(path: string, batches = this.state.batches) {

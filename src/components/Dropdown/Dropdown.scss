@@ -10,7 +10,8 @@
   .c-dropdown__item {
     width: 200px;
     padding: 10px 0;
-    background-color: darken($color-bg-grey, 10%);
+    font-weight: 500;
+    background-color: $color-bg-grey;
 
     &.c-focused {
       color: $color-black;

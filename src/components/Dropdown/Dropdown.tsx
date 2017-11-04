@@ -54,8 +54,9 @@ class DropdownComponent extends Preact.Component<Dropdown.Props, Dropdown.State>
     if (next === prev && match) {
       const route = match[1]
       const item = data.find(item => item.route === route)
-      if (item) {
-        this.props.dispatch(UtilsActions.dropdown(item.route, item.name))
+      const { sort, dispatch } = this.props
+      if (item && (!sort || item.route !== sort.by)) {
+        dispatch(UtilsActions.dropdown(item.route, item.name))
       }
     }
   }
