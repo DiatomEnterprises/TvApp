@@ -68,7 +68,7 @@ class CollectionsComponent extends Preact.Component<Collections.Props, Collectio
       <Link {...props}>
         <div className="c-item__content" style={_.background(item.image)}>
           <div className="float__right c-item__length">
-            <Icon image="movies" />
+            <Icon image="movies" tag="span" />
             {item.length}
           </div>
 

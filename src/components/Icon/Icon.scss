@@ -1,3 +1,15 @@
 .c-icon {
-  vertical-align: middle;
+  vertical-align: bottom;
+  background-repeat: no-repeat;
+
+  &.c-icon--titles {
+    padding-left: 25px;
+  }
+  &.c-icon--movies {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
+  }
 }

@@ -17,7 +17,42 @@
     border: 1px solid $color-font-main;
 
     &.c-focused {
-      border-color: $color-focused;
+      border: 1px solid $color-focused;
     }
+  }
+}
+
+.c-chevron {
+  z-index: 2;
+
+  &::after {
+    content: "";
+    width: 0.45em;
+    height: 0.45em;
+    display: inline-block;
+    @include chevron-border($color-font-main);
+
+    left: 0.5em;
+    top: -0.05em;
+    position: relative;
+    transform-origin: 50% 50%;
+
+    @include animations {
+      transition: transform 0.3s;
+    }
+  }
+
+  &.c-focused::after {
+    @include chevron-border($color-font-focused);
+  }
+
+  &.c-chevron--up::after {
+    transform: rotate(-45deg);
+  }
+  &.c-chevron--left::after {
+    transform: rotate(-135deg);
+  }
+  &.c-chevron--down::after {
+    transform: rotate(-225deg);
   }
 }

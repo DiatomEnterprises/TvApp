@@ -92,10 +92,9 @@ class MoviesComponent extends Preact.Component<Movies.Props, Movies.State> {
 
     return (
       <div className="c-collection">
-        <div className="c-collection__titles">
-          <Icon image="titles" />
-          <span>{titles} Titles</span>
-        </div>
+        <Icon className="c-collection__titles" image="titles">
+          {titles} Titles
+        </Icon>
         <div className="c-collection__description">{collection.description}</div>
 
         <div className="c-collection__nav">

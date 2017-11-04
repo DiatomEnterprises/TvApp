@@ -9,14 +9,11 @@
 
   &.c-focused {
     background-color: $color-focused;
-    &::after {
-      border-color: $color-font-focused;
-    }
   }
 
   &.c-chevron.c-chevron--left::after {
-    margin-left: 3px;
     @include center(both);
+    margin-left: 3px;
     transform: translate(-50%, -50%) rotate(-135deg);
   }
 }

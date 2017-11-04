@@ -1,15 +1,24 @@
 import Preact from "#preact"
-import { C } from "#utils"
+import * as classNames from "classnames"
+import { _ } from "#utils"
 
 import "./Icon.scss"
 
 export namespace Icon {
   export interface Props {
     image: string
+    tag?: string
+    className?: string
+    children?: JSX.Element[]
   }
 }
 
-export const Icon = ({ image }: Icon.Props) => {
-  const src = `${C.ASSETS_URL}icons/${image}.png`
-  return <img className="c-icon" src={src} alt="" />
+export const Icon = ({ tag, image, className, children }: Icon.Props) => {
+  const Tag = tag || "div"
+
+  return (
+    <Tag className={classNames("c-icon", `c-icon--${image}`, className)} style={_.background(`icons/${image}.png`)}>
+      {children}
+    </Tag>
+  )
 }
