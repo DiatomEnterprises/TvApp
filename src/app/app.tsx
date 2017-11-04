@@ -7,7 +7,7 @@ import { Store } from "#redux/store"
 import { UtilsActions } from "#redux/actions"
 import { BackButton, KeyboardMap, Navigation, Title } from "#components"
 import { Routes } from "./routes"
-import { Route } from "#utils"
+import { _, Route } from "#utils"
 
 import "./../styles/app.scss"
 
@@ -20,10 +20,11 @@ class AppComponent extends Preact.Component<MyRedux.Dispatch.Props & MyRedux.Red
   }
 
   render() {
-    const showNav = this.props.focused === "navigation"
+    const { focused, background } = this.props
+    const showNav = focused === "navigation"
 
     return (
-      <div className="c-container__wrapper center__both">
+      <div className="c-container__wrapper center__both" style={_.background(background)}>
         <KeyboardMap />
 
         <div className={classNames("c-container", { "c-container--full": !showNav })}>
@@ -38,7 +39,7 @@ class AppComponent extends Preact.Component<MyRedux.Dispatch.Props & MyRedux.Red
   }
 }
 
-const mapStateToProps = ({ utils }: MyRedux.State) => ({ focused: utils.focused })
+const mapStateToProps = ({ utils }: MyRedux.State) => ({ focused: utils.focused, background: utils.background })
 
 const AppWrapper = connect(mapStateToProps)(AppComponent as any)
 

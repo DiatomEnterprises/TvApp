@@ -18,6 +18,9 @@
 .c-collection {
   .c-collection__titles {
     margin: -10px 0 10px;
+    .c-icon {
+      margin-right: 5px;
+    }
   }
   .c-collection__description {
     width: 45%;

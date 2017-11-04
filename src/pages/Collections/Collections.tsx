@@ -4,8 +4,8 @@ import { route, getCurrentUrl } from "preact-router"
 import * as classNames from "classnames"
 
 import collections from "./data"
-import { Link } from "#components"
-import { Route, Slider } from "#utils"
+import { Link, Icon } from "#components"
+import { Route, Slider, _ } from "#utils"
 import { TitleActions, UtilsActions } from "#redux/actions"
 
 import "./Collections.scss"
@@ -19,6 +19,7 @@ namespace Collections {
     id: number
     name: string
     length: number
+    image: string
   }
 }
 
@@ -65,8 +66,11 @@ class CollectionsComponent extends Preact.Component<Collections.Props, Collectio
 
     return (
       <Link {...props}>
-        <div className="c-item__content">
-          <div className="float__right c-item__length">{item.length}</div>
+        <div className="c-item__content" style={_.background(item.image)}>
+          <div className="float__right c-item__length">
+            <Icon image="movies" />
+            {item.length}
+          </div>
 
           <div className="t-tx--center center__both">
             <div className="h4">Collection</div>

@@ -5,14 +5,13 @@
   }
 
   .c-movie {
-    $radius: 3px;
     $padding: 20px;
     $translate: 5px;
 
     width: 210px;
     height: 300px;
     display: inline-block;
-    border-radius: $radius;
+    border-radius: $size-border-radius;
     background-color: #242c33;
 
     & + .c-movie {
@@ -25,7 +24,7 @@
       z-index: -1;
       display: block;
       position: relative;
-      border-radius: $radius;
+      border-radius: $size-border-radius;
 
       @include animations {
         transition: transform 0.5s;

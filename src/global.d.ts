@@ -64,6 +64,7 @@ declare namespace MyRedux {
         by: SortBy
         name: string
       }
+      background?: string
       focused?: keyof KeyboardMap.Map
     }
   }

@@ -5,7 +5,7 @@ import { getCurrentUrl, route } from "preact-router"
 import { getState, batchMovies } from "./data"
 import { getCollection } from "./../Collections/data"
 import { _, Route, Slider } from "#utils"
-import { Movie, Link, BuyButton, SortButton, Dropdown } from "#components"
+import { Movie, Link, BuyButton, SortButton, Dropdown, Icon } from "#components"
 import { TitleActions, UtilsActions } from "#redux/actions"
 
 import "./Movies.scss"
@@ -41,6 +41,7 @@ class MoviesComponent extends Preact.Component<Movies.Props, Movies.State> {
     const { dispatch } = this.props
 
     dispatch(TitleActions.change(name, "Collections"))
+    dispatch(UtilsActions.background(collection.image))
     dispatch(UtilsActions.focus(Route.routeToKeyboard(url)))
     dispatch(UtilsActions.back(`${base}/back`, "back.movies"))
 
@@ -88,7 +89,10 @@ class MoviesComponent extends Preact.Component<Movies.Props, Movies.State> {
 
     return (
       <div className="c-collection">
-        <div className="c-collection__titles">{titles} Titles</div>
+        <div className="c-collection__titles">
+          <Icon image="titles" />
+          <span>{titles} Titles</span>
+        </div>
         <div className="c-collection__description">{collection.description}</div>
 
         <div className="c-collection__nav">

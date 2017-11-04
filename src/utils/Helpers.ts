@@ -1,3 +1,5 @@
+import { C } from "#utils"
+
 const childIndex = (element: Element): number => {
   const parent = element.parentElement as HTMLElement
   return Array.from(parent.children).indexOf(element)
@@ -20,4 +22,8 @@ const sortBy = {
   date: (array: any[]) => array.sort((a, b) => b.date - a.date)
 }
 
-export const _ = { childIndex, findInBatches, sortBy }
+const background = (image: string | undefined) => {
+  return image && { backgroundImage: `url(${C.ASSETS_URL}${image})` }
+}
+
+export const _ = { childIndex, findInBatches, sortBy, background }

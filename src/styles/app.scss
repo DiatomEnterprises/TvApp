@@ -14,6 +14,7 @@ body {
 }
 
 .c-container__wrapper {
+  background-size: cover;
   background-color: #3e3a29;
   overflow: hidden;
   width: map-get($main-sizes, max-width);
