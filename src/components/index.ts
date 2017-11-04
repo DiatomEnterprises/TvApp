@@ -1,6 +1,4 @@
-export * from "./Buttons/Back"
-export * from "./Buttons/Buy"
-export * from "./Buttons/Sort"
+export * from "./Buttons"
 export * from "./Dropdown/Dropdown"
 export * from "./Icon/Icon"
 export * from "./KeyboardMap/KeyboardMap"

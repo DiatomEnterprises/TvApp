@@ -20,15 +20,15 @@
   &:not(.c-nav__wrapper--hidden) {
     margin-top: 50px;
     .c-nav {
-      margin-left: -$size-nav-item-padding;
+      margin-left: -$size-button-padding;
     }
   }
 
   .c-nav .c-nav__item {
     font-size: 18px;
     display: inline-block;
-    padding: 10px $size-nav-item-padding;
-    border-radius: $size-nav-item-padding;
+    padding: 10px $size-button-padding;
+    border-radius: $size-button-padding;
 
     &.c-focused {
       font-weight: 500;

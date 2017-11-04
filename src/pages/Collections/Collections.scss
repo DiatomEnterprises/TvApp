@@ -1,6 +1,6 @@
 .c-container {
   &.c-container--full .c-collections {
-    transform: translateY(-19px);
+    transform: translateY(-20px);
   }
   &:not(.c-container--full) .c-collections {
     margin-left: 100px;
@@ -23,6 +23,7 @@
     }
 
     &.c-focused .c-item__length {
+      color: $color-font-focused;
       background-color: $color-focused;
     }
 
@@ -37,15 +38,16 @@
 
     .c-item__content {
       background-size: cover;
-      background-color: lighten(#242c33, 10%);
+      background-color: lighten($color-bg-grey, 5%);
     }
 
     .c-item__length {
       padding: 10px;
       font-size: 14px;
       display: inline-block;
-      background-color: #242c33;
+      background-color: $color-bg-grey;
       border-bottom-left-radius: $size-border-radius;
+
       .c-icon {
         width: 20px;
         margin-right: 5px;
@@ -56,13 +58,12 @@
       $size-moved: 10px;
 
       z-index: -1;
-      background-color: #242c33;
+      background-color: $color-bg-grey;
       transform: translate(-$size-moved, $size-moved);
-      top: 0;
 
       & + .c-card {
         z-index: -2;
-        background-color: #172027;
+        background-color: darken($color-bg-grey, 5%);
         transform: translate(-$size-moved*2, $size-moved*2);
       }
     }

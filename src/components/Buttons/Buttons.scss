@@ -1,0 +1,23 @@
+.c-button {
+  font-size: 20px;
+  display: inline-block;
+  padding: 10px $size-button-padding;
+  border-radius: $size-button-padding;
+
+  &.c-focused {
+    font-weight: 500;
+    color: $color-font-focused;
+    background-color: $color-focused;
+    box-shadow: $box-shadow;
+  }
+
+  &--primary {
+    min-width: 200px;
+    text-align: center;
+    border: 1px solid $color-font-main;
+
+    &.c-focused {
+      border-color: $color-focused;
+    }
+  }
+}

@@ -1,19 +1,22 @@
 .c-back_button {
-  font-size: 20px;
-  width: 40px;
-  height: 40px;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
   margin-left: 15px;
   border-radius: 50%;
   background-color: $color-bg-grey;
   box-shadow: $box-shadow;
 
-  span {
-    display: block;
-    padding-bottom: 3px;
-    padding-right: 3px;
-  }
-
   &.c-focused {
     background-color: $color-focused;
+    &::after {
+      border-color: $color-font-focused;
+    }
+  }
+
+  &.c-chevron.c-chevron--left::after {
+    margin-left: 3px;
+    @include center(both);
+    transform: translate(-50%, -50%) rotate(-135deg);
   }
 }

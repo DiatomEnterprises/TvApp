@@ -18,15 +18,13 @@ export class BackButtonComponent extends Preact.Component<MyRedux.Reducers.Utils
   renderButton(Tag: any, props: any) {
     return (
       <div className="c-back_button__wrapper">
-        <Tag {...props}>
-          <span className="center__both">◀</span>
-        </Tag>
+        <Tag {...props} />
       </div>
     )
   }
 
   render() {
-    const className = "c-back_button center__vertical float__left"
+    const className = "c-back_button c-chevron c-chevron--left center__vertical float__left"
 
     if (this.props.back) {
       const { path, map } = this.props.back

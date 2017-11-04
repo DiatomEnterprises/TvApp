@@ -47,7 +47,7 @@ class SortButtonComponent extends Preact.Component<SortButton.ExtraProps, SortBu
   render() {
     const is = this.is()
     const { base, map, sort } = this.props
-    const className = classNames("float__right c-button c-chevron", {
+    const className = classNames("float__right c-button c-button--primary c-button--sort c-chevron", {
       "c-chevron--up": is.dropdown,
       "c-chevron--down": !is.dropdown
     })

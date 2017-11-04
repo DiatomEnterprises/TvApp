@@ -12,7 +12,7 @@
     height: 300px;
     display: inline-block;
     border-radius: $size-border-radius;
-    background-color: #242c33;
+    background-color: $color-bg-grey;
 
     & + .c-movie {
       margin-left: 10px;
@@ -47,7 +47,7 @@
       padding-left: $padding;
 
       .c-movie__name {
-        color: white;
+        color: $color-white;
         display: none;
       }
     }

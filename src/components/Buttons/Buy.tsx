@@ -34,7 +34,7 @@ class BuyButtonComponent extends Preact.Component<BuyButton.Props & MyRedux.Disp
     const props: Link.Props = {
       map,
       path: `${base}/buy`,
-      className: "c-button float__left",
+      className: "c-button c-button--primary float__left",
       onClick: this.onClick
     }
     return <Link {...props}>Buy All XXX</Link>

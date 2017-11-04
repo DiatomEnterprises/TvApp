@@ -1,6 +1,6 @@
 .c-dropdown {
   z-index: 1;
-  top: 30px;
+  top: 40px;
   right: 20px;
   position: absolute;
   display: inline-block;
@@ -8,16 +8,16 @@
   overflow: hidden;
 
   .c-dropdown__item {
-    width: 160px;
+    width: 200px;
     padding: 10px 0;
-    background-color: darken(#242c33, 10);
+    background-color: darken($color-bg-grey, 10%);
 
     &.c-focused {
-      color: black;
+      color: $color-black;
       background-color: $color-focused;
     }
     & + .c-dropdown__item {
-      border-top: 1px solid black;
+      border-top: 1px solid $color-black;
     }
   }
 }

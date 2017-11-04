@@ -1,34 +1,5 @@
-.c-chevron {
-  z-index: 2;
-
-  &::after {
-    content: "";
-    display: inline-block;
-    border-style: solid;
-    border-width: 0.1em 0.1em 0 0;
-    width: 0.45em;
-    height: 0.45em;
-
-    left: 0.5em;
-    top: -0.05em;
-    position: relative;
-    transform-origin: 50% 50%;
-
-    @include animations {
-      transition: transform 0.3s;
-    }
-  }
-
-  &.c-chevron--up {
-    border-color: #242c33;
-    background-color: #242c33;
-    box-shadow: $box-shadow;
-
-    &::after {
-      transform: rotate(-45deg);
-    }
-  }
-  &.c-chevron--down::after {
-    transform: rotate(-225deg);
-  }
+.c-button--sort.c-chevron--up {
+  border-color: $color-bg-grey;
+  background-color: $color-bg-grey;
+  box-shadow: $box-shadow;
 }
