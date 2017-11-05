@@ -47,7 +47,7 @@ export const MapObject: KeyboardMap.Map = {
     right: "collections"
   },
   collections: {
-    selector: ".c-collections",
+    selector: ".c-collections__content",
     enter: ":current",
     left: ":prev",
     leftFirst: "back.collections",

@@ -55,9 +55,7 @@ class CollectionsComponent extends Preact.Component<Collections.Props, Collectio
   }
 
   renderItem = (item: Collections.Item, index: number) => {
-    const style = Slider.collections(index, this.state.current || 0)
     const props: Link.Props = {
-      style,
       map: "collections",
       path: `/collections/${item.id}`,
       className: "c-collections__item",
@@ -86,7 +84,15 @@ class CollectionsComponent extends Preact.Component<Collections.Props, Collectio
   }
 
   render() {
-    return <div className="c-collections">{collections.map(this.renderItem)}</div>
+    const style = Slider.collections(this.state.current || 0)
+
+    return (
+      <div className="c-collections">
+        <div style={style} className="c-collections__content">
+          {collections.map(this.renderItem)}
+        </div>
+      </div>
+    )
   }
 }
 
