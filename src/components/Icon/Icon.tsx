@@ -17,7 +17,7 @@ export const Icon = ({ tag, image, className, children }: Icon.Props) => {
   const Tag = tag || "div"
 
   return (
-    <Tag className={classNames("c-icon", `c-icon--${image}`, className)} style={_.background(`icons/${image}.png`)}>
+    <Tag className={classNames("c-icon", `c-icon--${image}`, className)} style={_.background(`icons/${image}.webp`)}>
       {children}
     </Tag>
   )

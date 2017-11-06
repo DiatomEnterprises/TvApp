@@ -1,9 +1,9 @@
 const array = [
-  { id: 1, name: "Superheroes", length: 22, image: "backgrounds/superheroes_bg.jpg" },
-  { id: 2, name: "Cartoons", length: 15, image: "backgrounds/cartoons_bg.jpg" },
-  { id: 3, name: "Horror", length: 24, image: "backgrounds/horror_bg.jpg" },
-  { id: 4, name: "Comedy", length: 7, image: "backgrounds/comedy_bg.jpg" },
-  { id: 5, name: "Action", length: 13, image: "backgrounds/action_bg.jpg" }
+  { id: 1, name: "Superheroes", length: 22, image: "backgrounds/superheroes_bg.webp" },
+  { id: 2, name: "Cartoons", length: 15, image: "backgrounds/cartoons_bg.webp" },
+  { id: 3, name: "Horror", length: 24, image: "backgrounds/horror_bg.webp" },
+  { id: 4, name: "Comedy", length: 7, image: "backgrounds/comedy_bg.webp" },
+  { id: 5, name: "Action", length: 13, image: "backgrounds/action_bg.webp" }
 ]
 
 export default array
