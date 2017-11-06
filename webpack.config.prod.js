@@ -3,7 +3,6 @@ const webpack = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CompressionPlugin = require("compression-webpack-plugin")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
-const CopyWebpackPlugin = require("copy-webpack-plugin")
 
 const ANIMATIONS = process.env.ANIMATIONS || false
 const NODE_ENV = process.env.NODE_ENV || "development"
@@ -72,7 +71,6 @@ const config = {
     }
   },
   plugins: [
-    new CopyWebpackPlugin([{ from: path.resolve("./assets"), to: "assets" }]),
     new ExtractTextPlugin("styles.css"),
     new webpack.DefinePlugin({
       "process.env": {

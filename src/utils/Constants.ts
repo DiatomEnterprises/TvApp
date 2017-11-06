@@ -1,4 +1,4 @@
-const ASSETS_URL = "/assets/"
+const ASSETS_URL = "http://janjiss.github.io/assets/"
 const FOCUSED_CLASS = "c-focused"
 const COLLECTION_WIDTH = 490
 const MOVIES_HEIGHT = 440

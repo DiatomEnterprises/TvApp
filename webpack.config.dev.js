@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 const DashboardPlugin = require("webpack-dashboard/plugin")
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
-const CopyWebpackPlugin = require("copy-webpack-plugin")
 
 const ANIMATIONS = process.env.ANIMATIONS || false
 const NODE_ENV = process.env.NODE_ENV || "development"
@@ -91,7 +90,6 @@ const config = {
     }
   },
   plugins: [
-    new CopyWebpackPlugin([{ from: path.resolve("./assets"), to: "assets" }]),
     new ExtractTextPlugin("styles.css"),
     new ForkTsCheckerWebpackPlugin({
       checkSyntacticErrors: true,
