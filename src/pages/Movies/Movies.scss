@@ -1,10 +1,9 @@
 .c-collection {
   .c-collection__titles {
-    margin: -10px 0 10px;
-    .c-icon {
-      margin-right: 5px;
-    }
+    height: 18px;
+    margin: 10px 0;
   }
+
   .c-collection__description {
     width: 45%;
     color: $color-white;
@@ -17,9 +16,15 @@
   }
 
   .c-collection__movies {
-    padding: 5px;
-    height: 420px;
+    padding: 0 5px;
+    height: 430px;
     overflow: hidden;
     position: relative;
+
+    @include animations {
+      .c-movie__wrapper {
+        transition: transform 0.4s;
+      }
+    }
   }
 }

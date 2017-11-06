@@ -5,17 +5,8 @@
   "license": "MIT",
   "main": "src/index.tsx",
   "scripts": {
-    "start": "npm run server:dev",
-    "server": "npm run server:dev",
-    "server:dev":
-      "webpack-dashboard -- webpack-dev-server --config ./webpack.config.dev.js --inline --progress --watch --hot --host 0.0.0.0",
-    "server:prod":
-      "cross-env NODE_ENV=production webpack-dashboard -- webpack-dev-server --config ./webpack.config.prod.js --port 3000 --host 0.0.0.0 --hot --inline --progress --profile --watch --content-base dist/",
-    "build": "npm run build:dev",
-    "build:dev":
-      "webpack --config ./webpack.config.dev.js --progress --profile --color --display-error-details --display-cached",
-    "build:prod":
-      "cross-env NODE_ENV=production webpack --config ./webpack.config.prod.js --progress --profile --color --display-error-details --display-cached --bail",
+    "dev": "webpack-dashboard -- webpack-dev-server --config ./webpack.config.dev.js --watch --hot --host 0.0.0.0",
+    "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.prod.js --progress --profile",
     "clean": "rimraf -- dist",
     "express": "node server.js"
   },
@@ -45,7 +36,7 @@
     "fork-ts-checker-webpack-plugin": "0.2.8",
     "html-loader": "0.5.1",
     "html-webpack-plugin": "2.30.1",
-    "node-sass": "4.5.3",
+    "node-sass": "4.6.0",
     "prettier": "1.7.4",
     "redux-logger": "3.0.6",
     "rimraf": "2.6.2",
@@ -53,10 +44,10 @@
     "sass-resources-loader": "1.3.1",
     "style-loader": "0.19.0",
     "thread-loader": "1.1.2",
-    "ts-loader": "3.1.0",
+    "ts-loader": "3.1.1",
     "tslint": "5.8.0",
     "tslint-loader": "3.5.3",
-    "typescript": "2.5.3",
+    "typescript": "2.6.1",
     "webpack-dashboard": "0.4.0",
     "webpack-dev-server": "2.7.1"
   }

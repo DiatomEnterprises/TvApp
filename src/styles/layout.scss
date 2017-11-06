@@ -40,8 +40,6 @@
     .c-content {
       display: inline-block;
       vertical-align: top;
-      width: map-get($main-sizes, content-width);
-      min-height: map-get($main-sizes, content-height)/2;
     }
   }
 }

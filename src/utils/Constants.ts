@@ -1,7 +1,7 @@
 const ASSETS_URL = "/assets/"
 const FOCUSED_CLASS = "c-focused"
-const COLLECTION_WIDTH = 500
-const MOVIES_HEIGHT = 430
+const COLLECTION_WIDTH = 490
+const MOVIES_HEIGHT = 440
 const MOVIE_LINE_HEIGHT = 310
 const DEFAULT_BACKGROUND = "backgrounds/comedy_bg.webp"
 

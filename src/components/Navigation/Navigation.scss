@@ -8,6 +8,8 @@
 
   &.c-nav__wrapper--hidden {
     opacity: 0;
+    position: absolute;
+
     &::after {
       transform: translate(-360px);
     }
@@ -19,6 +21,7 @@
 
   &:not(.c-nav__wrapper--hidden) {
     margin-top: 50px;
+    margin-right: 100px;
     .c-nav {
       margin-left: -$size-button-padding;
     }

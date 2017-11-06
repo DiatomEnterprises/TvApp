@@ -73,22 +73,20 @@ class MoviesComponent extends Preact.Component<Movies.Props, Movies.State> {
     this.setState({ currentBatch: this.currentBatch(next) })
   }
 
-  renderBatch(movies: Movie.Props[], index: number) {
-    const { currentBatch, base } = this.state
-    const style = Slider.movies(index, currentBatch)
-
+  renderBatch = (movies: Movie.Props[]) => {
     return (
-      <div style={style} className="c-movie__line">
-        {movies.map(movie => <Movie {...movie} onClick={this.onClick} path={base} />)}
+      <div className="c-movie__line">
+        {movies.map(movie => <Movie {...movie} onClick={this.onClick} path={this.state.base} />)}
       </div>
     )
   }
 
   render() {
-    const { collection, batches, titles, base } = this.state
+    const { collection, batches, titles, base, currentBatch } = this.state
     if (!collection) return null
     const button = { map: "movies/nav", base }
     const dropdown = { map: "movies/dropdown", base }
+    const style = Slider.movies(currentBatch)
 
     return (
       <div className="c-collection">
@@ -103,7 +101,11 @@ class MoviesComponent extends Preact.Component<Movies.Props, Movies.State> {
           <Dropdown {...dropdown} />
         </div>
 
-        <div className="c-collection__movies">{batches.map((movies, index) => this.renderBatch(movies, index))}</div>
+        <div className="c-collection__movies">
+          <div style={style} className="c-movie__wrapper">
+            {batches.map(this.renderBatch)}
+          </div>
+        </div>
       </div>
     )
   }
