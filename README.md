@@ -1,12 +1,12 @@
-# OreganTV Setup instructions
+# TvApp Setup instructions
 
-* Follow setup instructions for your platform to install nvm (Node version manager) [https://github.com/creationix/nvm](https://github.com/creationix/nvm)
+* For Node.js intallation we recommend using nvm (Node version manager). Follow isntructions for your target platform here: [https://github.com/creationix/nvm](https://github.com/creationix/nvm)
 * Install latest Node LTS `nvm install v8.9.0`
-* Clone OreganTV repository: `git clone git@github.com:GuskiS/OreganTV.git`
+* Clone OreganTV repository: `git clone git@github.com:DiatomEnterprises/TvApp.git`
 * Navigate to OreganTV projects directory `cd OreganTV`
 * Run `npm install`
 
-# Running OreganTV app
+# Running TvApp app
 
 ## Running application with animations
 To run app with animations, enter following command: `ANIMATIONS=true npm run build && npm run express`
