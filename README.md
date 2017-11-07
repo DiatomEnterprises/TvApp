@@ -3,7 +3,7 @@
 * For Node.js intallation we recommend using nvm (Node version manager). Follow setup isntructions for your target platform here: [https://github.com/creationix/nvm](https://github.com/creationix/nvm)
 * Install latest Node LTS `nvm install v8.9.0`
 * Clone TvApp repository: `git clone git@github.com:DiatomEnterprises/TvApp.git`
-* Navigate to OreganTV projects directory `cd TvApp`
+* Navigate to TvApp projects directory `cd TvApp`
 * Run `npm install`
 
 # Running TvApp app
